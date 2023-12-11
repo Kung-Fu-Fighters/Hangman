@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class Main extends Application{
+public class Hangman extends Application{
 
     public static void main(String[] args){
         launch(args);
@@ -15,9 +15,9 @@ public class Main extends Application{
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Awesome Hangman v0.1");
 
-        Button btn = new Button();
-        btn.setText("Start a new game");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+        Button button = new Button();
+        button.setText("Start a new game");
+        button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
 
@@ -25,7 +25,7 @@ public class Main extends Application{
         });
 
         StackPane root = new StackPane();
-        root.getChildren().add(btn);
+        root.getChildren().add(button);
         primaryStage.setScene(new Scene(root, 300, 250));
         primaryStage.show();
     }
