@@ -22,8 +22,7 @@ public class Hangman extends Application {
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    Output.exceptionErrorInt();
-                    inp.chooseInt();
+                    
                 }
             });
 
