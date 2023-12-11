@@ -25,10 +25,9 @@ public class Word {
     }
 
     // Method to allow players to guess for a letter
-    public boolean checkIfLetterExist(String guessedletter) {
+    public boolean checkIfLetterExist(char guessedletter) {
         //
-        String letter = guessedletter;
-        return this.wordString.contains(letter);
+       return this.wordString.contains(String.valueOf(guessedletter));
     }
 }
 
