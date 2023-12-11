@@ -25,9 +25,10 @@ public class Word {
     }
 
     // Method to allow players to guess for a letter
-    public boolean checkIfLetterExist(char guessedletter) {
-        //
-       return this.wordString.contains(String.valueOf(guessedletter));
+    public boolean checkIfLetterExist(String guessedletter) {
+        // convert all letter to lowe Case then compare the letters
+        String letter = guessedletter.toLowerCase();
+        return this.wordString.toLowerCase().contains(letter);
     }
 }
 
