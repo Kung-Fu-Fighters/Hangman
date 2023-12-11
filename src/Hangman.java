@@ -1,3 +1,4 @@
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,6 +9,7 @@ import javafx.stage.Stage;
 
 public class Hangman extends Application {
 
+    Input inp = new Input();
     public static void main(String[] args) {
         launch(args);
     }
@@ -20,7 +22,8 @@ public class Hangman extends Application {
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-
+                    Output.exceptionErrorInt();
+                    inp.chooseInt();
                 }
             });
 
