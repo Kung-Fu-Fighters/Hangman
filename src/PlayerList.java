@@ -5,8 +5,6 @@ import java.util.List;
 public class PlayerList{
     //A list to keep player items
     private List<Player> players;
-
-
     public PlayerList(){
         this.players=new ArrayList<>();
     }
@@ -22,7 +20,6 @@ public class PlayerList{
     public void addPlayer(Player player){
         players.add(player);
     }
-
     // SHOW PLAYER INFORMATION ONE BY ONE, IT WOULD BE GOOD IF WE CREATE A SEPARATE CLASS FOR THIS PURPOSE
     public void showPlayers(){
         for (Player player: players){
