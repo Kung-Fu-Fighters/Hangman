@@ -9,6 +9,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class Hangman extends Application {
 
     public static void main(String[] args) {
@@ -19,10 +21,14 @@ public class Hangman extends Application {
 
         Figure draw = new Figure();
         PlayerList playerList = new PlayerList();
+        playerList.addPlayer("Yves", "Tomte");
+        playerList.addPlayer("Rudolf", "Julgran");
+        playerList.addPlayer("Nicolaus", "Lussekatt");
+        playerList.addPlayer("Grinchen", "Pepparkaka");
 
         primaryStage.setTitle("Awesome Hangman v0.1");
-        Button buttonStartGame = new Button("Start a new game");
-        GridPane grid = new GridPane(); //the grid for the graphic
+        Button buttonStartGame = new Button("Start a new game"); //Is not in use at the moment
+        GridPane grid = new GridPane();
         Pane hangmanPane = new Pane();
         grid.add(hangmanPane, 0, 0);
         TextField textFieldGuess1 = new TextField();
@@ -38,10 +44,10 @@ public class Hangman extends Application {
         Button buttonGuess3 = new Button("Gissa");
         Button buttonGuess4 = new Button("Gissa");
         BorderPane borderPane = new BorderPane();
-        String player1 = "Spelare A"; //temporary place holders
-        String player2 = "Spelare B"; // these "names" should come from
-        String player3 = "Spelare C"; // the player objects in playerList
-        String player4 = "Spelare D";
+        String player1 = playerList.get(0).getName();
+        String player2 = playerList.get(1).getName();
+        String player3 = playerList.get(2).getName();
+        String player4 = playerList.get(3).getName();
         Pane hangmanPane1 = new Pane();
         Pane hangmanPane2 = new Pane();
         Pane hangmanPane3 = new Pane();
@@ -79,16 +85,55 @@ public class Hangman extends Application {
         primaryStage.show();
 
         buttonGuess1.setOnAction(event -> {
-            draw.updateHangmanFigure(1, 100, 100, hangmanPane1);
+            if(playerList.get(0).getGuessedWord().equals(textFieldGuess1)){
+                //kod för att visa att spelaren är ute
+            }
+            if(playerList.get(0).getGuessedWord().contains(textFieldGuess1.getText())){
+                //kod för att sätta ut bokstaven på rätt plats i ordet
+            }
+            if(!playerList.get(0).getGuessedWord().contains(textFieldGuess1.getText())){
+                playerList.get(0).setScorePoints(playerList.get(0).getScorePoints()+1);
+                draw.updateHangmanFigure(playerList.get(0).getScorePoints(), 100, 100, hangmanPane1);
+            }
         });
+
         buttonGuess2.setOnAction(event -> {
-            draw.updateHangmanFigure(1, 100, 100, hangmanPane2);
+            if(playerList.get(1).getGuessedWord().equals(textFieldGuess2)){
+                //kod för att visa att spelaren är ute
+            }
+            if(playerList.get(1).getGuessedWord().contains(textFieldGuess2.getText())){
+                //kod för att sätta ut bokstaven på rätt plats i ordet
+            }
+            if(!playerList.get(1).getGuessedWord().contains(textFieldGuess2.getText())){
+                playerList.get(1).setScorePoints(playerList.get(1).getScorePoints()+1);
+                draw.updateHangmanFigure(playerList.get(1).getScorePoints(), 100, 100, hangmanPane2);
+            }
         });
+
         buttonGuess3.setOnAction(event -> {
-            draw.updateHangmanFigure(1, 100, 100, hangmanPane3);
+            if(playerList.get(2).getGuessedWord().equals(textFieldGuess3)){
+                //kod för att visa att spelaren är ute
+            }
+            if(playerList.get(0).getGuessedWord().contains(textFieldGuess3.getText())){
+                //kod för att sätta ut bokstaven på rätt plats i ordet
+            }
+            if(!playerList.get(2).getGuessedWord().contains(textFieldGuess3.getText())){
+                playerList.get(2).setScorePoints(playerList.get(2).getScorePoints()+1);
+                draw.updateHangmanFigure(playerList.get(2).getScorePoints(), 100, 100, hangmanPane3);
+            }
         });
+
         buttonGuess4.setOnAction(event -> {
-            draw.updateHangmanFigure(1, 100, 100, hangmanPane4);
+            if(playerList.get(3).getGuessedWord().equals(textFieldGuess4)){
+                //kod för att visa att spelaren är ute
+            }
+            if(playerList.get(3).getGuessedWord().contains(textFieldGuess4.getText())){
+                //kod för att sätta ut bokstaven på rätt plats i ordet
+            }
+            if(!playerList.get(3).getGuessedWord().contains(textFieldGuess4.getText())){
+                playerList.get(3).setScorePoints(playerList.get(3).getScorePoints()+1);
+                draw.updateHangmanFigure(playerList.get(3).getScorePoints(), 100, 100, hangmanPane4);
+            }
         });
     }
 }

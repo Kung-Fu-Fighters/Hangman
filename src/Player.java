@@ -8,8 +8,8 @@ public class Player {
     private int positionY;
 
     public Player(String name, String guessedWord){
-        this.name=name;
-        this.guessedWord=guessedWord;
+        this.name = name;
+        this.guessedWord = guessedWord;;
     }
     public String getName(){
         return name;
