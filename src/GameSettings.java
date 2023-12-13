@@ -4,7 +4,7 @@ public class GameSettings {
     // instantiate variables 
     private int guessesAmount = 10;
     private int playerAmount = 4;
-    private PlayerList playerList = new Player List();
+    private PlayerList playerList = new PlayerList();
 
 
     // getter and setters
