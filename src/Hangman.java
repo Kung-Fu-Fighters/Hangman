@@ -9,8 +9,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-import java.lang.reflect.InvocationTargetException;
-
 public class Hangman extends Application {
     private int incorrectGuesses = 0;
 
@@ -87,8 +85,6 @@ public class Hangman extends Application {
 
         buttonGuess1.setOnAction(event -> {
 
-            incorrectGuesses++;
-            draw.updateHangmanFigure(incorrectGuesses, 100, 100, hangmanPane1);
 
             if(playerList.get(0).getGuessedWord().equals(textFieldGuess1)){
                 //kod för att visa att spelaren är ute
@@ -105,9 +101,6 @@ public class Hangman extends Application {
 
         buttonGuess2.setOnAction(event -> {
 
-            incorrectGuesses++;
-            draw.updateHangmanFigure(incorrectGuesses, 100, 100, hangmanPane2);
-
             if(playerList.get(1).getGuessedWord().equals(textFieldGuess2)){
                 //kod för att visa att spelaren är ute
             }
@@ -123,8 +116,8 @@ public class Hangman extends Application {
 
         buttonGuess3.setOnAction(event -> {
 
-            incorrectGuesses++;
-            draw.updateHangmanFigure(incorrectGuesses, 100, 100, hangmanPane3);
+            //incorrectGuesses++;
+            //draw.updateHangmanFigure(incorrectGuesses, 100, 100, hangmanPane3);
 
             if(playerList.get(2).getGuessedWord().equals(textFieldGuess3)){
                 //kod för att visa att spelaren är ute
@@ -141,8 +134,8 @@ public class Hangman extends Application {
 
         buttonGuess4.setOnAction(event -> {
 
-            incorrectGuesses++;
-            draw.updateHangmanFigure(incorrectGuesses, 100, 100, hangmanPane4);
+            //incorrectGuesses++;
+            //draw.updateHangmanFigure(incorrectGuesses, 100, 100, hangmanPane4);
 
             if(playerList.get(3).getGuessedWord().equals(textFieldGuess4)){
                 //kod för att visa att spelaren är ute
