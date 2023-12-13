@@ -3,13 +3,11 @@ import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.shape.Circle;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 public class Hangman extends Application {
 
@@ -22,25 +20,25 @@ public class Hangman extends Application {
         Figure draw = new Figure();
         PlayerList playerList = new PlayerList();
 
-        primaryStage.setTitle("Awesome Hangman v0.1"); //name at the top of the screen "stage"
+        primaryStage.setTitle("Awesome Hangman v0.1");
         Button buttonStartGame = new Button("Start a new game");
         GridPane grid = new GridPane(); //the grid for the graphic
         Pane hangmanPane = new Pane();
         grid.add(hangmanPane, 0, 0);
-        TextField textFieldGuess1 = new TextField(); //the field where the players their guesses
+        TextField textFieldGuess1 = new TextField();
         TextField textFieldGuess2 = new TextField();
         TextField textFieldGuess3 = new TextField();
         TextField textFieldGuess4 = new TextField();
-        textFieldGuess1.setPrefWidth(100); //the width of the textfield
+        textFieldGuess1.setPrefWidth(100);
         textFieldGuess2.setPrefWidth(100);
         textFieldGuess3.setPrefWidth(100);
         textFieldGuess4.setPrefWidth(100);
-        Button buttonGuess1 = new Button("Gissa"); //the button to submit your guess,
-        Button buttonGuess2 = new Button("Gissa"); // not functioning at the moment,
-        Button buttonGuess3 = new Button("Gissa"); // need to add some method calls,
-        Button buttonGuess4 = new Button("Gissa"); // like checkIfLetterExist()
+        Button buttonGuess1 = new Button("Gissa");
+        Button buttonGuess2 = new Button("Gissa");
+        Button buttonGuess3 = new Button("Gissa");
+        Button buttonGuess4 = new Button("Gissa");
         BorderPane borderPane = new BorderPane();
-        String player1 = "Spelare A"; //tmeporary place holders
+        String player1 = "Spelare A"; //temporary place holders
         String player2 = "Spelare B"; // these "names" should come from
         String player3 = "Spelare C"; // the player objects in playerList
         String player4 = "Spelare D";
@@ -61,12 +59,36 @@ public class Hangman extends Application {
 
         HBox topBox = new HBox();
         topBox.getChildren().addAll(playerArea1, playerArea2);
-
         HBox bottomBox = new HBox();
         bottomBox.getChildren().addAll(playerArea3, playerArea4);
-
+        HBox.setHgrow(playerArea1, Priority.ALWAYS);
+        HBox.setHgrow(playerArea2, Priority.ALWAYS);
+        HBox.setHgrow(playerArea3, Priority.ALWAYS);
+        HBox.setHgrow(playerArea4, Priority.ALWAYS);
+        VBox.setVgrow(topBox, Priority.ALWAYS);
+        VBox.setVgrow(bottomBox, Priority.ALWAYS);
+        hangmanPane1.setPrefSize(200, 200);
+        hangmanPane2.setPrefSize(200, 200);
+        hangmanPane3.setPrefSize(200, 200);
+        hangmanPane4.setPrefSize(200, 200);
         VBox root = new VBox();
         root.getChildren().addAll(topBox, bottomBox);
 
+        Scene scene = new Scene(root, 800, 600);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+        buttonGuess1.setOnAction(event -> {
+            draw.updateHangmanFigure(1, 100, 100, hangmanPane1);
+        });
+        buttonGuess2.setOnAction(event -> {
+            draw.updateHangmanFigure(1, 100, 100, hangmanPane2);
+        });
+        buttonGuess3.setOnAction(event -> {
+            draw.updateHangmanFigure(1, 100, 100, hangmanPane3);
+        });
+        buttonGuess4.setOnAction(event -> {
+            draw.updateHangmanFigure(1, 100, 100, hangmanPane4);
+        });
     }
 }
