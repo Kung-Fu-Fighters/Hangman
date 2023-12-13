@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class Hangman extends Application {
-    private int incorrectGuesses = 0;
 
     public static void main(String[] args) {
         launch(args);
