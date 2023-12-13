@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import java.lang.reflect.InvocationTargetException;
 
 public class Hangman extends Application {
+    private int incorrectGuesses = 0;
 
     public static void main(String[] args) {
         launch(args);
@@ -85,6 +86,10 @@ public class Hangman extends Application {
         primaryStage.show();
 
         buttonGuess1.setOnAction(event -> {
+
+            incorrectGuesses++;
+            draw.updateHangmanFigure(incorrectGuesses, 100, 100, hangmanPane1);
+
             if(playerList.get(0).getGuessedWord().equals(textFieldGuess1)){
                 //kod för att visa att spelaren är ute
             }
@@ -95,9 +100,14 @@ public class Hangman extends Application {
                 playerList.get(0).setScorePoints(playerList.get(0).getScorePoints()+1);
                 draw.updateHangmanFigure(playerList.get(0).getScorePoints(), 100, 100, hangmanPane1);
             }
+
         });
 
         buttonGuess2.setOnAction(event -> {
+
+            incorrectGuesses++;
+            draw.updateHangmanFigure(incorrectGuesses, 100, 100, hangmanPane2);
+
             if(playerList.get(1).getGuessedWord().equals(textFieldGuess2)){
                 //kod för att visa att spelaren är ute
             }
@@ -108,9 +118,14 @@ public class Hangman extends Application {
                 playerList.get(1).setScorePoints(playerList.get(1).getScorePoints()+1);
                 draw.updateHangmanFigure(playerList.get(1).getScorePoints(), 100, 100, hangmanPane2);
             }
+
         });
 
         buttonGuess3.setOnAction(event -> {
+
+            incorrectGuesses++;
+            draw.updateHangmanFigure(incorrectGuesses, 100, 100, hangmanPane3);
+
             if(playerList.get(2).getGuessedWord().equals(textFieldGuess3)){
                 //kod för att visa att spelaren är ute
             }
@@ -121,9 +136,14 @@ public class Hangman extends Application {
                 playerList.get(2).setScorePoints(playerList.get(2).getScorePoints()+1);
                 draw.updateHangmanFigure(playerList.get(2).getScorePoints(), 100, 100, hangmanPane3);
             }
+
         });
 
         buttonGuess4.setOnAction(event -> {
+
+            incorrectGuesses++;
+            draw.updateHangmanFigure(incorrectGuesses, 100, 100, hangmanPane4);
+
             if(playerList.get(3).getGuessedWord().equals(textFieldGuess4)){
                 //kod för att visa att spelaren är ute
             }
@@ -134,6 +154,7 @@ public class Hangman extends Application {
                 playerList.get(3).setScorePoints(playerList.get(3).getScorePoints()+1);
                 draw.updateHangmanFigure(playerList.get(3).getScorePoints(), 100, 100, hangmanPane4);
             }
+
         });
     }
 }
