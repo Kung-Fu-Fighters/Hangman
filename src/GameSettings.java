@@ -2,14 +2,14 @@ public class GameSettings {
 
 
     // instantiate variables 
-    private int guessesAmount;
+    private int guessesAmount = 10;
     private int playerAmount = 4;
     private PlayerList playerList = new Player List();
 
 
     // getter and setters
     public int getGuessesAmount() {
-        playerList.addPlayer(new Player());
+        return  getPlayerAmount();
     }
 
     public void setGuessesAmount(int guessesAmount) {
