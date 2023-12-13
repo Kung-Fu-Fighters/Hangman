@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class Hangman extends Application {
+    private int incorrectGuesses = 0;
 
     public static void main(String[] args) {
         launch(args);
@@ -79,16 +80,20 @@ public class Hangman extends Application {
         primaryStage.show();
 
         buttonGuess1.setOnAction(event -> {
-            draw.updateHangmanFigure(1, 100, 100, hangmanPane1);
+            incorrectGuesses++;
+            draw.updateHangmanFigure(incorrectGuesses, 100, 100, hangmanPane1);
         });
         buttonGuess2.setOnAction(event -> {
-            draw.updateHangmanFigure(1, 100, 100, hangmanPane2);
+            incorrectGuesses++;
+            draw.updateHangmanFigure(incorrectGuesses, 100, 100, hangmanPane2);
         });
         buttonGuess3.setOnAction(event -> {
-            draw.updateHangmanFigure(1, 100, 100, hangmanPane3);
+            incorrectGuesses++;
+            draw.updateHangmanFigure(incorrectGuesses, 100, 100, hangmanPane3);
         });
         buttonGuess4.setOnAction(event -> {
-            draw.updateHangmanFigure(1, 100, 100, hangmanPane4);
+            incorrectGuesses++;
+            draw.updateHangmanFigure(incorrectGuesses, 100, 100, hangmanPane4);
         });
     }
 }
