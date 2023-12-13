@@ -15,13 +15,14 @@ public class Figure {
 
     //this is a start on a method for updating the drawings, it uses a switch statement
     // where each case draws one line or part in the figure
-    public void updateHangmanFigure(int incorrectGuesses, Pane root) {
+    public void updateHangmanFigure(int incorrectGuesses, int positionX, int positionY, Pane root) {
+
         switch (incorrectGuesses) {
             case 1:
                 // create the hill
                 Arc arc = new Arc();
-                arc.setCenterX(50.0f);
-                arc.setCenterY(50.0f);
+                arc.setCenterX(positionX);
+                arc.setCenterY(positionY);
                 arc.setRadiusX(25.0f);
                 arc.setRadiusY(25.0f);
                 arc.setStartAngle(0.0f);
