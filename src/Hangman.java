@@ -23,10 +23,10 @@ public class Hangman extends Application {
 
         Figure draw = new Figure();
         PlayerList playerList = new PlayerList();
-        playerList.addPlayer("Yves", "JAVA");
-        playerList.addPlayer("Rudolf", "GAME");
-        playerList.addPlayer("Nicolaus", "GRAN");
-        playerList.addPlayer("Grinchen", "KAKA");
+        playerList.addPlayer("Yves", "java");
+        playerList.addPlayer("Rudolf", "game");
+        playerList.addPlayer("Nicolaus", "gran");
+        playerList.addPlayer("Grinchen", "kaka");
 
         primaryStage.setTitle("Awesome Hangman v0.1");
         Button buttonStartGame = new Button("Start a new game"); //Is not in use at the moment
@@ -94,7 +94,7 @@ public class Hangman extends Application {
         primaryStage.show();
 
         buttonGuess1.setOnAction(event -> {
-            String guessedLetter = textFieldGuess1.getText().toUpperCase();
+            String guessedLetter = textFieldGuess1.getText();
 
             if(playerList.get(0).getGuessedWord().equals(textFieldGuess1)){
                 //kod för att visa att spelaren är ute
@@ -113,7 +113,7 @@ public class Hangman extends Application {
 
                     if (correctGuess) {
                         System.out.println(displayWord1);
-                        wordToGuessLabel1.setText(displayWord1.toString());
+                        wordToGuessLabel1.setText(displayWord1.toString().toUpperCase());
                     }
                 }
             }
@@ -126,7 +126,7 @@ public class Hangman extends Application {
         });
 
         buttonGuess2.setOnAction(event -> {
-            String guessedLetter = textFieldGuess2.getText().toUpperCase();
+            String guessedLetter = textFieldGuess2.getText();
 
             if(playerList.get(1).getGuessedWord().equals(textFieldGuess2)){
                 //kod för att visa att spelaren är ute
@@ -145,7 +145,7 @@ public class Hangman extends Application {
 
                     if (correctGuess) {
                         System.out.println(displayWord2);
-                        wordToGuessLabel1.setText(displayWord2.toString());
+                        wordToGuessLabel2.setText(displayWord2.toString().toUpperCase());
                     }
                 }
             }
@@ -157,7 +157,7 @@ public class Hangman extends Application {
         });
 
         buttonGuess3.setOnAction(event -> {
-            String guessedLetter = textFieldGuess3.getText().toUpperCase();
+            String guessedLetter = textFieldGuess3.getText();
 
             if(playerList.get(2).getGuessedWord().equals(textFieldGuess3)){
                 //kod för att visa att spelaren är ute
@@ -176,7 +176,7 @@ public class Hangman extends Application {
 
                     if (correctGuess) {
                         System.out.println(displayWord3);
-                        wordToGuessLabel1.setText(displayWord3.toString());
+                        wordToGuessLabel3.setText(displayWord3.toString().toUpperCase());
                     }
                 }
             }
@@ -188,7 +188,7 @@ public class Hangman extends Application {
         });
 
         buttonGuess4.setOnAction(event -> {
-            String guessedLetter = textFieldGuess4.getText().toUpperCase();
+            String guessedLetter = textFieldGuess4.getText();
 
             if(playerList.get(3).getGuessedWord().equals(textFieldGuess4)){
                 //kod för att visa att spelaren är ute
@@ -207,7 +207,7 @@ public class Hangman extends Application {
 
                     if (correctGuess) {
                         System.out.println(displayWord4);
-                        wordToGuessLabel1.setText(displayWord4.toString());
+                        wordToGuessLabel4.setText(displayWord4.toString().toUpperCase());
                     }
                 }
             }
