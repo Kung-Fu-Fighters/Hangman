@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,10 +28,8 @@ public class Hangman extends Application {
         playerList.addPlayer("Rudolf - Poäng: ", "game");
         playerList.addPlayer("Nicolaus - Poäng: ", "gran");
         playerList.addPlayer("Grinchen - Poäng: ", "kaka");
-        playerList.get(0).initialize();
-        playerList.get(1).initialize();
-        playerList.get(2).initialize();
-        playerList.get(3).initialize();
+
+        playerList.initializeAll();
 
         primaryStage.setTitle("Awesome Hangman v0.1");
         Button buttonStartGame = new Button("Start a new game"); //Is not in use at the moment
@@ -74,7 +74,9 @@ public class Hangman extends Application {
         Label wordToGuessLabel4 = new Label(displayWord4.toString());
 
 
-        playerArea1.getChildren().addAll(new Label(player1), textFieldGuess1, buttonGuess1, wordToGuessLabel1, hangmanPane1);
+        Label player1lbl = new Label(player1);
+
+        playerArea1.getChildren().addAll(player1lbl, textFieldGuess1, buttonGuess1, wordToGuessLabel1, hangmanPane1);
         playerArea2.getChildren().addAll(new Label(player2), textFieldGuess2, buttonGuess2, wordToGuessLabel2, hangmanPane2);
         playerArea3.getChildren().addAll(new Label(player3), textFieldGuess3, buttonGuess3, wordToGuessLabel3, hangmanPane3);
         playerArea4.getChildren().addAll(new Label(player4), textFieldGuess4, buttonGuess4, wordToGuessLabel4, hangmanPane4);
@@ -103,7 +105,17 @@ public class Hangman extends Application {
         VictoryConditions vicCond = new VictoryConditions();
         vicCond.checkVictoryCondition(playerList);
 
-        buttonGuess1.setOnAction(event -> {
+        buttonGuess1.setOnAction(new PlayerInteraction(
+                playerList.get(0),
+                textFieldGuess1,
+                displayWord1,
+                draw,
+                hangmanPane1,
+                wordToGuessLabel1,
+                player1lbl
+        ));
+
+        /*buttonGuess1.setOnAction(event -> {
             String guessedLetter = textFieldGuess1.getText();
 
             if (playerList.get(0).getGuessedWord().equals(textFieldGuess1)) {
@@ -132,8 +144,9 @@ public class Hangman extends Application {
                 draw.updateHangmanFigure(playerList.get(0).getScorePoints(), 100, 100, hangmanPane1);
                 // if score point = 10, create a new secret Word and update score tabel
                 vicCond.checkVictoryCondition(playerList);
+                player1lbl.setText(playerList.get(0).getName() + playerList.get(0).getScore());
             }
-        });
+        });*/
 
         buttonGuess2.setOnAction(event -> {
             String guessedLetter = textFieldGuess2.getText();
