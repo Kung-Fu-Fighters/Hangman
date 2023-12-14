@@ -1,15 +1,8 @@
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import javafx.scene.text.Text;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Arc;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Arc;
-import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 public class Figure {
 
@@ -73,8 +66,7 @@ public class Figure {
                 // Case 10: Draw the right leg
                 Line rightLeg = new Line(positionX + 30, positionY - 15, positionX + 40, positionY);
                 root.getChildren().add(rightLeg);
-                break;
-            case 11:
+
                 // Case 11: Show that the player has won(for example with a text)
                 Text winText = new Text(positionX, positionY - 100, "Grattis, du har vunnit!");
                 root.getChildren().add(winText);

@@ -20,13 +20,16 @@ public class Hangman extends Application {
     public void start(Stage primaryStage) {
 
 
-
         Figure draw = new Figure();
         PlayerList playerList = new PlayerList();
-        playerList.addPlayer("Yves", "java");
-        playerList.addPlayer("Rudolf", "game");
-        playerList.addPlayer("Nicolaus", "gran");
-        playerList.addPlayer("Grinchen", "kaka");
+        playerList.addPlayer("Yves - Poäng: ", "java");
+        playerList.addPlayer("Rudolf - Poäng: ", "game");
+        playerList.addPlayer("Nicolaus - Poäng: ", "gran");
+        playerList.addPlayer("Grinchen - Poäng: ", "kaka");
+        playerList.get(0).initialize();
+        playerList.get(1).initialize();
+        playerList.get(2).initialize();
+        playerList.get(3).initialize();
 
         primaryStage.setTitle("Awesome Hangman v0.1");
         Button buttonStartGame = new Button("Start a new game"); //Is not in use at the moment
@@ -46,10 +49,14 @@ public class Hangman extends Application {
         Button buttonGuess3 = new Button("Gissa");
         Button buttonGuess4 = new Button("Gissa");
         BorderPane borderPane = new BorderPane();
-        String player1 = playerList.get(0).getName();
-        String player2 = playerList.get(1).getName();
-        String player3 = playerList.get(2).getName();
-        String player4 = playerList.get(3).getName();
+        int scoreTable1 = playerList.get(0).getScore();
+        int scoreTable2 = playerList.get(1).getScore();
+        int scoreTable3 = playerList.get(2).getScore();
+        int scoreTable4 = playerList.get(3).getScore();
+        String player1 = playerList.get(0).getName() + scoreTable1;
+        String player2 = playerList.get(1).getName() + scoreTable2;
+        String player3 = playerList.get(2).getName() + scoreTable3;
+        String player4 = playerList.get(3).getName() + scoreTable4;
         Pane hangmanPane1 = new Pane();
         Pane hangmanPane2 = new Pane();
         Pane hangmanPane3 = new Pane();
@@ -93,13 +100,16 @@ public class Hangman extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
+        VictoryConditions vicCond = new VictoryConditions();
+        vicCond.checkVictoryCondition(playerList);
+
         buttonGuess1.setOnAction(event -> {
             String guessedLetter = textFieldGuess1.getText();
 
-            if(playerList.get(0).getGuessedWord().equals(textFieldGuess1)){
+            if (playerList.get(0).getGuessedWord().equals(textFieldGuess1)) {
                 //kod för att visa att spelaren är ute
             }
-            if(playerList.get(0).getGuessedWord().contains(textFieldGuess1.getText())) {
+            if (playerList.get(0).getGuessedWord().contains(textFieldGuess1.getText())) {
                 //kod för att sätta ut bokstaven på rätt plats i ordet
                 if (guessedLetter.length() == 1) {
                     boolean correctGuess = false;
@@ -117,21 +127,21 @@ public class Hangman extends Application {
                     }
                 }
             }
-                if (!playerList.get(0).getGuessedWord().contains(textFieldGuess1.getText())) {
-                    playerList.get(0).setScorePoints(playerList.get(0).getScorePoints() + 1);
-                    draw.updateHangmanFigure(playerList.get(0).getScorePoints(), 100, 100, hangmanPane1);
-                }
-
-
+            if (!playerList.get(0).getGuessedWord().contains(textFieldGuess1.getText())) {
+                playerList.get(0).setScorePoints(playerList.get(0).getScorePoints() + 1);
+                draw.updateHangmanFigure(playerList.get(0).getScorePoints(), 100, 100, hangmanPane1);
+                // if score point = 10, create a new secret Word and update score tabel
+                vicCond.checkVictoryCondition(playerList);
+            }
         });
 
         buttonGuess2.setOnAction(event -> {
             String guessedLetter = textFieldGuess2.getText();
 
-            if(playerList.get(1).getGuessedWord().equals(textFieldGuess2)){
+            if (playerList.get(1).getGuessedWord().equals(textFieldGuess2)) {
                 //kod för att visa att spelaren är ute
             }
-            if(playerList.get(1).getGuessedWord().contains(textFieldGuess2.getText())) {
+            if (playerList.get(1).getGuessedWord().contains(textFieldGuess2.getText())) {
                 //kod för att sätta ut bokstaven på rätt plats i ordet
                 if (guessedLetter.length() == 1) {
                     boolean correctGuess = false;
@@ -149,9 +159,10 @@ public class Hangman extends Application {
                     }
                 }
             }
-            if(!playerList.get(1).getGuessedWord().contains(textFieldGuess2.getText())){
-                playerList.get(1).setScorePoints(playerList.get(1).getScorePoints()+1);
+            if (!playerList.get(1).getGuessedWord().contains(textFieldGuess2.getText())) {
+                playerList.get(1).setScorePoints(playerList.get(1).getScorePoints() + 1);
                 draw.updateHangmanFigure(playerList.get(1).getScorePoints(), 100, 100, hangmanPane2);
+                // if score point = 10, create a new secret Word and update score tabel
             }
 
         });
@@ -159,10 +170,10 @@ public class Hangman extends Application {
         buttonGuess3.setOnAction(event -> {
             String guessedLetter = textFieldGuess3.getText();
 
-            if(playerList.get(2).getGuessedWord().equals(textFieldGuess3)){
+            if (playerList.get(2).getGuessedWord().equals(textFieldGuess3)) {
                 //kod för att visa att spelaren är ute
             }
-            if(playerList.get(2).getGuessedWord().contains(textFieldGuess3.getText())) {
+            if (playerList.get(2).getGuessedWord().contains(textFieldGuess3.getText())) {
                 //kod för att sätta ut bokstaven på rätt plats i ordet
                 if (guessedLetter.length() == 1) {
                     boolean correctGuess = false;
@@ -180,9 +191,10 @@ public class Hangman extends Application {
                     }
                 }
             }
-            if(!playerList.get(2).getGuessedWord().contains(textFieldGuess3.getText())){
-                playerList.get(2).setScorePoints(playerList.get(2).getScorePoints()+1);
+            if (!playerList.get(2).getGuessedWord().contains(textFieldGuess3.getText())) {
+                playerList.get(2).setScorePoints(playerList.get(2).getScorePoints() + 1);
                 draw.updateHangmanFigure(playerList.get(2).getScorePoints(), 100, 100, hangmanPane3);
+                // if score point = 10, create a new secret Word and update score tabel
             }
 
         });
@@ -190,10 +202,10 @@ public class Hangman extends Application {
         buttonGuess4.setOnAction(event -> {
             String guessedLetter = textFieldGuess4.getText();
 
-            if(playerList.get(3).getGuessedWord().equals(textFieldGuess4)){
+            if (playerList.get(3).getGuessedWord().equals(textFieldGuess4)) {
                 //kod för att visa att spelaren är ute
             }
-            if(playerList.get(3).getGuessedWord().contains(textFieldGuess4.getText())) {
+            if (playerList.get(3).getGuessedWord().contains(textFieldGuess4.getText())) {
                 //kod för att sätta ut bokstaven på rätt plats i ordet
                 if (guessedLetter.length() == 1) {
                     boolean correctGuess = false;
@@ -211,11 +223,20 @@ public class Hangman extends Application {
                     }
                 }
             }
-            if(!playerList.get(3).getGuessedWord().contains(textFieldGuess4.getText())){
-                playerList.get(3).setScorePoints(playerList.get(3).getScorePoints()+1);
+            if (!playerList.get(3).getGuessedWord().contains(textFieldGuess4.getText())) {
+                playerList.get(3).setScorePoints(playerList.get(3).getScorePoints() + 1);
                 draw.updateHangmanFigure(playerList.get(3).getScorePoints(), 100, 100, hangmanPane4);
+                // if score point = 10, create a new secret Word and update score tabel
             }
 
         });
+
+
+        //if (playerList.get(0).getScorePoints() == 10) {
+          //  playerList.get(0).setScore(playerList.get(0).getScore() + 1);
+            //scoreTable1 = playerList.get(0).getScore();
+            //System.out.println(playerList.get(0).getScore());
+        //}
     }
+
 }
