@@ -46,7 +46,12 @@ public class Hangman extends Application {
         Button buttonGuess2 = new Button("Gissa");
         Button buttonGuess3 = new Button("Gissa");
         Button buttonGuess4 = new Button("Gissa");
-        BorderPane borderPane = new BorderPane();
+
+        Button comfirmButton1 = new Button("Bekräfta nytt ord");
+        Button comfirmButton2 = new Button("Bekräfta nytt ord");
+        Button comfirmButton3 = new Button("Bekräfta nytt ord");
+        Button comfirmButton4 = new Button("Bekräfta nytt ord");
+
         int scoreTable1 = playerList.get(0).getScore();
         int scoreTable2 = playerList.get(1).getScore();
         int scoreTable3 = playerList.get(2).getScore();
@@ -78,10 +83,10 @@ public class Hangman extends Application {
         Label player4lbl = new Label(player4);
 
 
-        playerArea1.getChildren().addAll(player1lbl, textFieldGuess1, buttonGuess1, wordToGuessLabel1, hangmanPane1);
-        playerArea2.getChildren().addAll(player2lbl, textFieldGuess2, buttonGuess2, wordToGuessLabel2, hangmanPane2);
-        playerArea3.getChildren().addAll(player3lbl, textFieldGuess3, buttonGuess3, wordToGuessLabel3, hangmanPane3);
-        playerArea4.getChildren().addAll(player4lbl, textFieldGuess4, buttonGuess4, wordToGuessLabel4, hangmanPane4);
+        playerArea1.getChildren().addAll(player1lbl, textFieldGuess1, buttonGuess1, comfirmButton1, wordToGuessLabel1, hangmanPane1);
+        playerArea2.getChildren().addAll(player2lbl, textFieldGuess2, buttonGuess2, comfirmButton2, wordToGuessLabel2, hangmanPane2);
+        playerArea3.getChildren().addAll(player3lbl, textFieldGuess3, buttonGuess3, comfirmButton3, wordToGuessLabel3, hangmanPane3);
+        playerArea4.getChildren().addAll(player4lbl, textFieldGuess4, buttonGuess4, comfirmButton4, wordToGuessLabel4, hangmanPane4);
 
         HBox topBox = new HBox();
         topBox.getChildren().addAll(playerArea1, playerArea2);
@@ -147,6 +152,13 @@ public class Hangman extends Application {
                 player4lbl
         ));
 
+        /*comfirmButton1.setOnAction(new PlayerInteraction(
+                playerList.get(0).setGuessedWord(String.valueOf(textFieldGuess1)),
+                displayWord4,
+                hangmanPane1,
+                wordToGuessLabel1,
+                player1lbl
+        ));*/
 
     }
 
