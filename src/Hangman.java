@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class Hangman extends Application {
 
     public static StringBuilder generateDisplayWord() {
-        return new StringBuilder("_ _ _ _");
+        return new StringBuilder("____");
     }
     public static Button createGuessButton() {
         return new Button("Gissa");
