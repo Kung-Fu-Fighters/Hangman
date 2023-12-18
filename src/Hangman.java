@@ -14,6 +14,12 @@ public class Hangman extends Application {
     public static Button createGuessButton() {
         return new Button("Gissa");
     }
+    public static Label generatePlayerLabel(Player player) {
+        String playerName = player.getName();
+        int score = player.getScore();
+        String playerInfo = playerName + " " + score;
+        return new Label(playerInfo);
+    }
     public static void main(String[] args) {
         launch(args);
     }
@@ -57,17 +63,15 @@ public class Hangman extends Application {
         Button buttonGuess3 = createGuessButton();
         Button buttonGuess4 = createGuessButton();
 
-        BorderPane borderPane = new BorderPane();
+        Label player1lbl = generatePlayerLabel(playerList.get(0));
+        Label player2lbl = generatePlayerLabel(playerList.get(1));
+        Label player3lbl = generatePlayerLabel(playerList.get(2));
+        Label player4lbl = generatePlayerLabel(playerList.get(3));
 
-        int scoreTable1 = playerList.get(0).getScore();
-        int scoreTable2 = playerList.get(1).getScore();
-        int scoreTable3 = playerList.get(2).getScore();
-        int scoreTable4 = playerList.get(3).getScore();
-
-        String player1 = playerList.get(0).getName() + scoreTable1;
-        String player2 = playerList.get(1).getName() + scoreTable2;
-        String player3 = playerList.get(2).getName() + scoreTable3;
-        String player4 = playerList.get(3).getName() + scoreTable4;
+        StringBuilder displayWord1 = generateDisplayWord();
+        StringBuilder displayWord2 = generateDisplayWord();
+        StringBuilder displayWord3 = generateDisplayWord();
+        StringBuilder displayWord4 = generateDisplayWord();
 
         Pane hangmanPane1 = new Pane();
         Pane hangmanPane2 = new Pane();
@@ -84,11 +88,6 @@ public class Hangman extends Application {
         Label wordToGuessLabel2 = new Label(displayWord2.toString());
         Label wordToGuessLabel3 = new Label(displayWord3.toString());
         Label wordToGuessLabel4 = new Label(displayWord4.toString());
-
-        Label player1lbl = new Label(player1);
-        Label player2lbl = new Label(player2);
-        Label player3lbl = new Label(player3);
-        Label player4lbl = new Label(player4);
 
         playerArea1.getChildren().addAll(player1lbl, textFieldGuess1, buttonGuess1, wordToGuessLabel1, hangmanPane1);
         playerArea2.getChildren().addAll(player2lbl, textFieldGuess2, buttonGuess2, wordToGuessLabel2, hangmanPane2);
