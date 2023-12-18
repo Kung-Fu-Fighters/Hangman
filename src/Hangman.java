@@ -6,6 +6,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 public class Hangman extends Application {
 
     public static StringBuilder generateDisplayWord() {
@@ -19,6 +21,23 @@ public class Hangman extends Application {
         int score = player.getScore();
         String playerInfo = playerName + " " + score;
         return new Label(playerInfo);
+    }
+    public static void setupButtonGuessAction(List<Player> playerList, List<Button> buttons,
+                                              List<TextField> textFields, List<StringBuilder> displayWords,
+                                              List<Pane> hangmanPanes, List<Label> wordToGuessLabels,
+                                              List<Label> playerLabels, Figure draw) {
+        for (int i = 0; i < playerList.size(); i++) {
+            int playerIndex = i;
+            buttons.get(i).setOnAction(new PlayerInteraction(
+                    playerList.get(playerIndex),
+                    textFields.get(playerIndex),
+                    displayWords.get(playerIndex),
+                    draw,
+                    hangmanPanes.get(playerIndex),
+                    wordToGuessLabels.get(playerIndex),
+                    playerLabels.get(playerIndex)
+            ));
+        }
     }
     public static void main(String[] args) {
         launch(args);
@@ -116,14 +135,15 @@ public class Hangman extends Application {
         VictoryConditions vicCond = new VictoryConditions();
         vicCond.checkVictoryCondition(playerList);
 
+
         buttonGuess1.setOnAction(new PlayerInteraction(
-                playerList.get(0),
-                textFieldGuess1,
-                displayWord1,
-                draw,
-                hangmanPane1,
-                wordToGuessLabel1,
-                player1lbl
+            playerList.get(0),
+            textFieldGuess1,
+            displayWord1,
+            draw,
+            hangmanPane1,
+            wordToGuessLabel1,
+            player1lbl
         ));
 
         buttonGuess2.setOnAction(new PlayerInteraction(
