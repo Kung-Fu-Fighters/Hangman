@@ -15,7 +15,10 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
   private Label wordToGuessLabel;
   private Label playerLabel;
   private TurnOrder turnOrder;
-  private VBox playerArea;
+  private VBox playerAreaA;
+  private VBox playerAreaB;
+  private VBox playerAreaC;
+  private VBox playerAreaD;
 
   public PlayerInteraction(Player player,
                            TextField textFieldGuess,
@@ -25,7 +28,10 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
                            Label wordToGuessLabel,
                            Label playerLabel,
                            TurnOrder turnOrder,
-                           VBox playerArea) {
+                           VBox playerAreaA,
+                           VBox playerAreaB,
+                           VBox playerAreaC,
+                           VBox playerAreaD) {
     this.player = player;
     this.textFieldGuess = textFieldGuess;
     this.displayWord = displayWord;
@@ -34,7 +40,10 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
     this.wordToGuessLabel = wordToGuessLabel;
     this.playerLabel = playerLabel;
     this.turnOrder= turnOrder;
-    this.playerArea=playerArea;
+    this.playerAreaA=playerAreaA;
+    this.playerAreaB=playerAreaB;
+    this.playerAreaC=playerAreaC;
+    this.playerAreaD=playerAreaD;
   }
 
   @Override
@@ -63,7 +72,12 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
 
     turnOrder.setGuessingAmount(guessingAmountNumber+1);
     if(guessingAmountNumber==3){
-      playerArea.setStyle("-fx-background-color: #ffffff;");
+      playerAreaA.setStyle("-fx-background-color: #ffffff;");
+      playerAreaB.setStyle("-fx-background-color: #ffffff;");
+      playerAreaC.setStyle("-fx-background-color: #ffffff;");
+      playerAreaD.setStyle("-fx-background-color: #ffffff;");
+
+      System.out.println("Guessing amount number: " + guessingAmountNumber);
       turnOrder.setGuessingAmount(guessingAmountNumber=1);
       turnOrder.moveToNextPlayer();
     }
@@ -73,7 +87,7 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
     wordToGuessLabel.setText(displayWord.toString().toUpperCase());
     playerLabel.setText(player.getName() + player.getScore());
     if (turnOrder.getGuessingAmount()==1){
-      playerArea.setStyle("-fx-background-color: #e7cbcb;");
+      playerAreaA.setStyle("-fx-background-color: #e7cbcb;");
     }
 
   }

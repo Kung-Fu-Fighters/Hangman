@@ -128,7 +128,10 @@ public class Hangman extends Application {
                 wordToGuessLabel1,
                 player1lbl,
                 turnOrder,
-                playerArea1
+                playerArea1,
+                playerArea2,
+                playerArea3,
+                playerArea4
 
         ));
 
@@ -141,7 +144,11 @@ public class Hangman extends Application {
                 wordToGuessLabel2,
                 player2lbl,
                 turnOrder,
-                playerArea2
+                playerArea2,
+                playerArea1,
+                playerArea3,
+                playerArea4
+
         ));
 
         buttonGuess3.setOnAction(new PlayerInteraction(
@@ -153,7 +160,10 @@ public class Hangman extends Application {
                 wordToGuessLabel3,
                 player3lbl,
                 turnOrder,
-                playerArea3
+                playerArea3,
+                playerArea1,
+                playerArea2,
+                playerArea4
         ));
 
         buttonGuess4.setOnAction(new PlayerInteraction(
@@ -165,7 +175,12 @@ public class Hangman extends Application {
                 wordToGuessLabel4,
                 player4lbl,
                 turnOrder,
-                playerArea4
+                playerArea4,
+                playerArea1,
+                playerArea2,
+                playerArea3
+
+
         ));
     }
 }
