@@ -4,6 +4,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class PlayerInteraction implements EventHandler<ActionEvent> {
 
@@ -76,8 +77,6 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
       playerAreaB.setStyle("-fx-background-color: #ffffff;");
       playerAreaC.setStyle("-fx-background-color: #ffffff;");
       playerAreaD.setStyle("-fx-background-color: #ffffff;");
-
-      System.out.println("Guessing amount number: " + guessingAmountNumber);
       turnOrder.setGuessingAmount(guessingAmountNumber=1);
       turnOrder.moveToNextPlayer();
     }

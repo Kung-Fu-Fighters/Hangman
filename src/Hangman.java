@@ -73,7 +73,7 @@ public class Hangman extends Application {
         VBox playerArea2 = new VBox();
         VBox playerArea3 = new VBox();
         VBox playerArea4 = new VBox();
-        //playerArea1.setStyle("-fx-background-color: #e7cbcb;");
+        playerArea1.setStyle("-fx-background-color: #e7cbcb;");
         // Create a label to display the word to be guessed
         Label wordToGuessLabel1 = new Label(displayWord1.toString());
         Label wordToGuessLabel2 = new Label(displayWord2.toString());
