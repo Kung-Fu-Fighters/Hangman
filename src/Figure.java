@@ -68,8 +68,9 @@ public class Figure {
                 root.getChildren().add(rightLeg);
 
                 // Case 11: Show that the player has won(for example with a text)
-                Text winText = new Text(positionX, positionY - 100, "Grattis, du har vunnit!");
+                Text winText = new Text(positionX, positionY - 100, "Grattis, du har vunnit!\n Välj ett nytt ord");
                 root.getChildren().add(winText);
+
                 break;
         }
     }
