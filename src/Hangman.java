@@ -7,11 +7,9 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class Hangman extends Application {
-
     public static void main(String[] args) {
         launch(args);
     }
-
     private StringBuilder displayWord1 = new StringBuilder("____");
     private StringBuilder displayWord2 = new StringBuilder("____");
     private StringBuilder displayWord3 = new StringBuilder("____");
@@ -34,32 +32,34 @@ public class Hangman extends Application {
         GridPane grid = new GridPane();
         Pane hangmanPane = new Pane();
         grid.add(hangmanPane, 0, 0);
+
         TextField textFieldGuess1 = new TextField();
         TextField textFieldGuess2 = new TextField();
         TextField textFieldGuess3 = new TextField();
         TextField textFieldGuess4 = new TextField();
+
         textFieldGuess1.setPrefWidth(100);
         textFieldGuess2.setPrefWidth(100);
         textFieldGuess3.setPrefWidth(100);
         textFieldGuess4.setPrefWidth(100);
+
         Button buttonGuess1 = new Button("Gissa");
         Button buttonGuess2 = new Button("Gissa");
         Button buttonGuess3 = new Button("Gissa");
         Button buttonGuess4 = new Button("Gissa");
 
-        Button comfirmButton1 = new Button("Bekräfta nytt ord");
-        Button comfirmButton2 = new Button("Bekräfta nytt ord");
-        Button comfirmButton3 = new Button("Bekräfta nytt ord");
-        Button comfirmButton4 = new Button("Bekräfta nytt ord");
+        BorderPane borderPane = new BorderPane();
 
         int scoreTable1 = playerList.get(0).getScore();
         int scoreTable2 = playerList.get(1).getScore();
         int scoreTable3 = playerList.get(2).getScore();
         int scoreTable4 = playerList.get(3).getScore();
+
         String player1 = playerList.get(0).getName() + scoreTable1;
         String player2 = playerList.get(1).getName() + scoreTable2;
         String player3 = playerList.get(2).getName() + scoreTable3;
         String player4 = playerList.get(3).getName() + scoreTable4;
+
         Pane hangmanPane1 = new Pane();
         Pane hangmanPane2 = new Pane();
         Pane hangmanPane3 = new Pane();
@@ -83,25 +83,28 @@ public class Hangman extends Application {
         Label player4lbl = new Label(player4);
 
 
-        playerArea1.getChildren().addAll(player1lbl, textFieldGuess1, buttonGuess1, comfirmButton1, wordToGuessLabel1, hangmanPane1);
-        playerArea2.getChildren().addAll(player2lbl, textFieldGuess2, buttonGuess2, comfirmButton2, wordToGuessLabel2, hangmanPane2);
-        playerArea3.getChildren().addAll(player3lbl, textFieldGuess3, buttonGuess3, comfirmButton3, wordToGuessLabel3, hangmanPane3);
-        playerArea4.getChildren().addAll(player4lbl, textFieldGuess4, buttonGuess4, comfirmButton4, wordToGuessLabel4, hangmanPane4);
+        playerArea1.getChildren().addAll(player1lbl, textFieldGuess1, buttonGuess1, wordToGuessLabel1, hangmanPane1);
+        playerArea2.getChildren().addAll(player2lbl, textFieldGuess2, buttonGuess2, wordToGuessLabel2, hangmanPane2);
+        playerArea3.getChildren().addAll(player3lbl, textFieldGuess3, buttonGuess3, wordToGuessLabel3, hangmanPane3);
+        playerArea4.getChildren().addAll(player4lbl, textFieldGuess4, buttonGuess4, wordToGuessLabel4, hangmanPane4);
 
         HBox topBox = new HBox();
         topBox.getChildren().addAll(playerArea1, playerArea2);
         HBox bottomBox = new HBox();
         bottomBox.getChildren().addAll(playerArea3, playerArea4);
+
         HBox.setHgrow(playerArea1, Priority.ALWAYS);
         HBox.setHgrow(playerArea2, Priority.ALWAYS);
         HBox.setHgrow(playerArea3, Priority.ALWAYS);
         HBox.setHgrow(playerArea4, Priority.ALWAYS);
         VBox.setVgrow(topBox, Priority.ALWAYS);
         VBox.setVgrow(bottomBox, Priority.ALWAYS);
+
         hangmanPane1.setPrefSize(200, 200);
         hangmanPane2.setPrefSize(200, 200);
         hangmanPane3.setPrefSize(200, 200);
         hangmanPane4.setPrefSize(200, 200);
+
         VBox root = new VBox();
         root.getChildren().addAll(topBox, bottomBox);
 
@@ -151,15 +154,5 @@ public class Hangman extends Application {
                 wordToGuessLabel4,
                 player4lbl
         ));
-
-        /*comfirmButton1.setOnAction(new PlayerInteraction(
-                playerList.get(0).setGuessedWord(String.valueOf(textFieldGuess1)),
-                displayWord4,
-                hangmanPane1,
-                wordToGuessLabel1,
-                player1lbl
-        ));*/
-
     }
-
 }
