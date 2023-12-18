@@ -24,11 +24,6 @@ public class Hangman extends Application {
         launch(args);
     }
 
-    StringBuilder displayWord1 = generateDisplayWord();
-    StringBuilder displayWord2 = generateDisplayWord();
-    StringBuilder displayWord3 = generateDisplayWord();
-    StringBuilder displayWord4 = generateDisplayWord();
-
     public void start(Stage primaryStage) {
 
         Figure draw = new Figure();
