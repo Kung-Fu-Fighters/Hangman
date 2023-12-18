@@ -1,6 +1,4 @@
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -75,11 +73,15 @@ public class Hangman extends Application {
 
 
         Label player1lbl = new Label(player1);
+        Label player2lbl = new Label(player2);
+        Label player3lbl = new Label(player3);
+        Label player4lbl = new Label(player4);
+
 
         playerArea1.getChildren().addAll(player1lbl, textFieldGuess1, buttonGuess1, wordToGuessLabel1, hangmanPane1);
-        playerArea2.getChildren().addAll(new Label(player2), textFieldGuess2, buttonGuess2, wordToGuessLabel2, hangmanPane2);
-        playerArea3.getChildren().addAll(new Label(player3), textFieldGuess3, buttonGuess3, wordToGuessLabel3, hangmanPane3);
-        playerArea4.getChildren().addAll(new Label(player4), textFieldGuess4, buttonGuess4, wordToGuessLabel4, hangmanPane4);
+        playerArea2.getChildren().addAll(player2lbl, textFieldGuess2, buttonGuess2, wordToGuessLabel2, hangmanPane2);
+        playerArea3.getChildren().addAll(player3lbl, textFieldGuess3, buttonGuess3, wordToGuessLabel3, hangmanPane3);
+        playerArea4.getChildren().addAll(player4lbl, textFieldGuess4, buttonGuess4, wordToGuessLabel4, hangmanPane4);
 
         HBox topBox = new HBox();
         topBox.getChildren().addAll(playerArea1, playerArea2);
@@ -115,141 +117,37 @@ public class Hangman extends Application {
                 player1lbl
         ));
 
-        /*buttonGuess1.setOnAction(event -> {
-            String guessedLetter = textFieldGuess1.getText();
+        buttonGuess2.setOnAction(new PlayerInteraction(
+                playerList.get(1),
+                textFieldGuess2,
+                displayWord2,
+                draw,
+                hangmanPane2,
+                wordToGuessLabel2,
+                player2lbl
+        ));
 
-            if (playerList.get(0).getGuessedWord().equals(textFieldGuess1)) {
-                //kod för att visa att spelaren är ute
-            }
-            if (playerList.get(0).getGuessedWord().contains(textFieldGuess1.getText())) {
-                //kod för att sätta ut bokstaven på rätt plats i ordet
-                if (guessedLetter.length() == 1) {
-                    boolean correctGuess = false;
+        buttonGuess3.setOnAction(new PlayerInteraction(
+                playerList.get(2),
+                textFieldGuess3,
+                displayWord3,
+                draw,
+                hangmanPane3,
+                wordToGuessLabel3,
+                player3lbl
+        ));
 
-                    for (int i = 0; i < playerList.get(0).getGuessedWord().length(); i++) {
-                        if (playerList.get(0).getGuessedWord().charAt(i) == guessedLetter.charAt(0)) {
-                            displayWord1.setCharAt(i, guessedLetter.charAt(0));
-                            correctGuess = true;
-                        }
-                    }
-
-                    if (correctGuess) {
-                        System.out.println(displayWord1);
-                        wordToGuessLabel1.setText(displayWord1.toString().toUpperCase());
-                    }
-                }
-            }
-            if (!playerList.get(0).getGuessedWord().contains(textFieldGuess1.getText())) {
-                playerList.get(0).setScorePoints(playerList.get(0).getScorePoints() + 1);
-                draw.updateHangmanFigure(playerList.get(0).getScorePoints(), 100, 100, hangmanPane1);
-                // if score point = 10, create a new secret Word and update score tabel
-                vicCond.checkVictoryCondition(playerList);
-                player1lbl.setText(playerList.get(0).getName() + playerList.get(0).getScore());
-            }
-        });*/
-
-        buttonGuess2.setOnAction(event -> {
-            String guessedLetter = textFieldGuess2.getText();
-
-            if (playerList.get(1).getGuessedWord().equals(textFieldGuess2)) {
-                //kod för att visa att spelaren är ute
-            }
-            if (playerList.get(1).getGuessedWord().contains(textFieldGuess2.getText())) {
-                //kod för att sätta ut bokstaven på rätt plats i ordet
-                if (guessedLetter.length() == 1) {
-                    boolean correctGuess = false;
-
-                    for (int i = 0; i < playerList.get(1).getGuessedWord().length(); i++) {
-                        if (playerList.get(1).getGuessedWord().charAt(i) == guessedLetter.charAt(0)) {
-                            displayWord2.setCharAt(i, guessedLetter.charAt(0));
-                            correctGuess = true;
-                        }
-                    }
-
-                    if (correctGuess) {
-                        System.out.println(displayWord2);
-                        wordToGuessLabel2.setText(displayWord2.toString().toUpperCase());
-                    }
-                }
-            }
-            if (!playerList.get(1).getGuessedWord().contains(textFieldGuess2.getText())) {
-                playerList.get(1).setScorePoints(playerList.get(1).getScorePoints() + 1);
-                draw.updateHangmanFigure(playerList.get(1).getScorePoints(), 100, 100, hangmanPane2);
-                // if score point = 10, create a new secret Word and update score tabel
-            }
-
-        });
-
-        buttonGuess3.setOnAction(event -> {
-            String guessedLetter = textFieldGuess3.getText();
-
-            if (playerList.get(2).getGuessedWord().equals(textFieldGuess3)) {
-                //kod för att visa att spelaren är ute
-            }
-            if (playerList.get(2).getGuessedWord().contains(textFieldGuess3.getText())) {
-                //kod för att sätta ut bokstaven på rätt plats i ordet
-                if (guessedLetter.length() == 1) {
-                    boolean correctGuess = false;
-
-                    for (int i = 0; i < playerList.get(2).getGuessedWord().length(); i++) {
-                        if (playerList.get(2).getGuessedWord().charAt(i) == guessedLetter.charAt(0)) {
-                            displayWord3.setCharAt(i, guessedLetter.charAt(0));
-                            correctGuess = true;
-                        }
-                    }
-
-                    if (correctGuess) {
-                        System.out.println(displayWord3);
-                        wordToGuessLabel3.setText(displayWord3.toString().toUpperCase());
-                    }
-                }
-            }
-            if (!playerList.get(2).getGuessedWord().contains(textFieldGuess3.getText())) {
-                playerList.get(2).setScorePoints(playerList.get(2).getScorePoints() + 1);
-                draw.updateHangmanFigure(playerList.get(2).getScorePoints(), 100, 100, hangmanPane3);
-                // if score point = 10, create a new secret Word and update score tabel
-            }
-
-        });
-
-        buttonGuess4.setOnAction(event -> {
-            String guessedLetter = textFieldGuess4.getText();
-
-            if (playerList.get(3).getGuessedWord().equals(textFieldGuess4)) {
-                //kod för att visa att spelaren är ute
-            }
-            if (playerList.get(3).getGuessedWord().contains(textFieldGuess4.getText())) {
-                //kod för att sätta ut bokstaven på rätt plats i ordet
-                if (guessedLetter.length() == 1) {
-                    boolean correctGuess = false;
-
-                    for (int i = 0; i < playerList.get(3).getGuessedWord().length(); i++) {
-                        if (playerList.get(3).getGuessedWord().charAt(i) == guessedLetter.charAt(0)) {
-                            displayWord4.setCharAt(i, guessedLetter.charAt(0));
-                            correctGuess = true;
-                        }
-                    }
-
-                    if (correctGuess) {
-                        System.out.println(displayWord4);
-                        wordToGuessLabel4.setText(displayWord4.toString().toUpperCase());
-                    }
-                }
-            }
-            if (!playerList.get(3).getGuessedWord().contains(textFieldGuess4.getText())) {
-                playerList.get(3).setScorePoints(playerList.get(3).getScorePoints() + 1);
-                draw.updateHangmanFigure(playerList.get(3).getScorePoints(), 100, 100, hangmanPane4);
-                // if score point = 10, create a new secret Word and update score tabel
-            }
-
-        });
+        buttonGuess4.setOnAction(new PlayerInteraction(
+                playerList.get(3),
+                textFieldGuess4,
+                displayWord4,
+                draw,
+                hangmanPane4,
+                wordToGuessLabel4,
+                player4lbl
+        ));
 
 
-        //if (playerList.get(0).getScorePoints() == 10) {
-          //  playerList.get(0).setScore(playerList.get(0).getScore() + 1);
-            //scoreTable1 = playerList.get(0).getScore();
-            //System.out.println(playerList.get(0).getScore());
-        //}
     }
 
 }
