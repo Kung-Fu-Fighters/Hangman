@@ -11,6 +11,9 @@ public class Hangman extends Application {
     public static StringBuilder generateDisplayWord() {
         return new StringBuilder("_ _ _ _");
     }
+    public static Button createGuessButton() {
+        return new Button("Gissa");
+    }
     public static void main(String[] args) {
         launch(args);
     }
@@ -22,9 +25,9 @@ public class Hangman extends Application {
 
     public void start(Stage primaryStage) {
 
-
         Figure draw = new Figure();
         PlayerList playerList = new PlayerList();
+
         playerList.addPlayer("Yves - Poäng: ", "java");
         playerList.addPlayer("Rudolf - Poäng: ", "game");
         playerList.addPlayer("Nicolaus - Poäng: ", "gran");
@@ -49,10 +52,10 @@ public class Hangman extends Application {
         textFieldGuess3.setPrefWidth(100);
         textFieldGuess4.setPrefWidth(100);
 
-        Button buttonGuess1 = new Button("Gissa");
-        Button buttonGuess2 = new Button("Gissa");
-        Button buttonGuess3 = new Button("Gissa");
-        Button buttonGuess4 = new Button("Gissa");
+        Button buttonGuess1 = createGuessButton();
+        Button buttonGuess2 = createGuessButton();
+        Button buttonGuess3 = createGuessButton();
+        Button buttonGuess4 = createGuessButton();
 
         BorderPane borderPane = new BorderPane();
 
