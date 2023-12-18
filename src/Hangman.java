@@ -7,13 +7,18 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class Hangman extends Application {
+
+    public static StringBuilder generateDisplayWord() {
+        return new StringBuilder("_ _ _ _");
+    }
     public static void main(String[] args) {
         launch(args);
     }
-    private StringBuilder displayWord1 = new StringBuilder("____");
-    private StringBuilder displayWord2 = new StringBuilder("____");
-    private StringBuilder displayWord3 = new StringBuilder("____");
-    private StringBuilder displayWord4 = new StringBuilder("____");
+
+    StringBuilder displayWord1 = generateDisplayWord();
+    StringBuilder displayWord2 = generateDisplayWord();
+    StringBuilder displayWord3 = generateDisplayWord();
+    StringBuilder displayWord4 = generateDisplayWord();
 
     public void start(Stage primaryStage) {
 
@@ -29,6 +34,7 @@ public class Hangman extends Application {
 
         primaryStage.setTitle("Awesome Hangman v0.1");
         Button buttonStartGame = new Button("Start a new game"); //Is not in use at the moment
+
         GridPane grid = new GridPane();
         Pane hangmanPane = new Pane();
         grid.add(hangmanPane, 0, 0);
@@ -76,12 +82,10 @@ public class Hangman extends Application {
         Label wordToGuessLabel3 = new Label(displayWord3.toString());
         Label wordToGuessLabel4 = new Label(displayWord4.toString());
 
-
         Label player1lbl = new Label(player1);
         Label player2lbl = new Label(player2);
         Label player3lbl = new Label(player3);
         Label player4lbl = new Label(player4);
-
 
         playerArea1.getChildren().addAll(player1lbl, textFieldGuess1, buttonGuess1, wordToGuessLabel1, hangmanPane1);
         playerArea2.getChildren().addAll(player2lbl, textFieldGuess2, buttonGuess2, wordToGuessLabel2, hangmanPane2);
