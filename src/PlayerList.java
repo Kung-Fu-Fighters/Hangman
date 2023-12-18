@@ -34,5 +34,4 @@ public class PlayerList{
     public void initializeAll() {
         players.forEach(Player::initialize);
     }
-
 }

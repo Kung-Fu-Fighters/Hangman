@@ -7,6 +7,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="scenebuilder-kit-21.0.0" level="project" />
     <orderEntry type="library" name="lib" level="project" />
+  </component>
+  <component name="SonarLintModuleSettings">
+    <option name="uniqueId" value="669c9a57-6d99-4f6d-938d-8a0ef4edd817" />
   </component>
 </module>
