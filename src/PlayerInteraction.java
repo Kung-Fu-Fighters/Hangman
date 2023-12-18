@@ -3,6 +3,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 public class PlayerInteraction implements EventHandler<ActionEvent> {
 
@@ -13,6 +14,8 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
   private Pane hangmanPane;
   private Label wordToGuessLabel;
   private Label playerLabel;
+  private TurnOrder turnOrder;
+  private VBox playerArea;
 
   public PlayerInteraction(Player player,
                            TextField textFieldGuess,
@@ -20,7 +23,9 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
                            Figure draw,
                            Pane hangmanPane,
                            Label wordToGuessLabel,
-                           Label playerLabel) {
+                           Label playerLabel,
+                           TurnOrder turnOrder,
+                           VBox playerArea) {
     this.player = player;
     this.textFieldGuess = textFieldGuess;
     this.displayWord = displayWord;
@@ -28,6 +33,8 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
     this.hangmanPane = hangmanPane;
     this.wordToGuessLabel = wordToGuessLabel;
     this.playerLabel = playerLabel;
+    this.turnOrder= turnOrder;
+    this.playerArea=playerArea;
   }
 
   @Override
@@ -46,13 +53,29 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
     } else {
       handleIncorrectGuess();
     }
-
+    changeTurn();
     render();
   }
 
+
+  public void changeTurn(){
+    int guessingAmountNumber= turnOrder.getGuessingAmount();
+
+    turnOrder.setGuessingAmount(guessingAmountNumber+1);
+    if(guessingAmountNumber==3){
+      playerArea.setStyle("-fx-background-color: #ffffff;");
+      turnOrder.setGuessingAmount(guessingAmountNumber=1);
+      turnOrder.moveToNextPlayer();
+    }
+
+  }
   public void render() {
     wordToGuessLabel.setText(displayWord.toString().toUpperCase());
     playerLabel.setText(player.getName() + player.getScore());
+    if (turnOrder.getGuessingAmount()==1){
+      playerArea.setStyle("-fx-background-color: #e7cbcb;");
+    }
+
   }
 
   public void handleIncorrectGuess() {

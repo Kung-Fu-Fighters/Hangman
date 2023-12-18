@@ -3,6 +3,7 @@ import java.util.Queue;
 import java.util.LinkedList;
 
 public class TurnOrder {
+    int guessingAmount=1;
 
     //Instance variable of type Queue (kö).
     private Queue<Player> playerQueue; // first in and first out.
@@ -21,5 +22,22 @@ public class TurnOrder {
     public void moveToNextPlayer() {
         Player currentPlayer = playerQueue.poll(); // poll() removes the current player from the beging of the queue
         playerQueue.offer(currentPlayer); // offer() it adding the player to the end of the queue
+
+    }
+
+    public int getGuessingAmount() {
+        return guessingAmount;
+    }
+
+    public void setGuessingAmount(int guessingAmount) {
+        this.guessingAmount = guessingAmount;
+    }
+
+    public Queue<Player> getPlayerQueue() {
+        return playerQueue;
+    }
+
+    public void setPlayerQueue(Queue<Player> playerQueue) {
+        this.playerQueue = playerQueue;
     }
 }

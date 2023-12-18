@@ -6,6 +6,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 public class Hangman extends Application {
     public static void main(String[] args) {
         launch(args);
@@ -20,6 +22,8 @@ public class Hangman extends Application {
 
         Figure draw = new Figure();
         PlayerList playerList = new PlayerList();
+        TurnOrder turnOrder = new TurnOrder(playerList.getPlayers());
+
         playerList.addPlayer("Yves - Poäng: ", "java");
         playerList.addPlayer("Rudolf - Poäng: ", "game");
         playerList.addPlayer("Nicolaus - Poäng: ", "gran");
@@ -69,7 +73,7 @@ public class Hangman extends Application {
         VBox playerArea2 = new VBox();
         VBox playerArea3 = new VBox();
         VBox playerArea4 = new VBox();
-
+        //playerArea1.setStyle("-fx-background-color: #e7cbcb;");
         // Create a label to display the word to be guessed
         Label wordToGuessLabel1 = new Label(displayWord1.toString());
         Label wordToGuessLabel2 = new Label(displayWord2.toString());
@@ -122,7 +126,10 @@ public class Hangman extends Application {
                 draw,
                 hangmanPane1,
                 wordToGuessLabel1,
-                player1lbl
+                player1lbl,
+                turnOrder,
+                playerArea1
+
         ));
 
         buttonGuess2.setOnAction(new PlayerInteraction(
@@ -132,7 +139,9 @@ public class Hangman extends Application {
                 draw,
                 hangmanPane2,
                 wordToGuessLabel2,
-                player2lbl
+                player2lbl,
+                turnOrder,
+                playerArea2
         ));
 
         buttonGuess3.setOnAction(new PlayerInteraction(
@@ -142,7 +151,9 @@ public class Hangman extends Application {
                 draw,
                 hangmanPane3,
                 wordToGuessLabel3,
-                player3lbl
+                player3lbl,
+                turnOrder,
+                playerArea3
         ));
 
         buttonGuess4.setOnAction(new PlayerInteraction(
@@ -152,7 +163,9 @@ public class Hangman extends Application {
                 draw,
                 hangmanPane4,
                 wordToGuessLabel4,
-                player4lbl
+                player4lbl,
+                turnOrder,
+                playerArea4
         ));
     }
 }

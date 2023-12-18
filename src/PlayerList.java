@@ -9,15 +9,11 @@ public class PlayerList{
 
         this.players = new ArrayList<>();
     }
-    //To avoid direct modification it calls a copy of the player list
-    public List<Player> getPlayers(){
-        return players;
-    }
 
     public void setPlayers(List<Player> players){
         this.players = players;
     }
-    // To adding one player at a time
+    // To add one player at a time
     public void addPlayer(String name, String guessedWord){
         players.add(new Player(name, guessedWord));
     }
@@ -30,6 +26,10 @@ public class PlayerList{
         for (Player player: players){
             System.out.println("Player name [" + player.getName() + "]\nGuessed Word " + "[" + player.getGuessedWord() + "]");
         }
+    }
+
+    public List<Player> getPlayers() {
+        return this.players;
     }
 
     public void initializeAll() {
