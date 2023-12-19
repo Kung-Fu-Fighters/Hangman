@@ -3,23 +3,65 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class PlayerArea extends VBox {
 
+  private TextField textFieldGuess;
+  private Button buttonGuess;
+  private Button confirmButton;
+  private Label playerLbl;
+  private Label wordToGuessLbl;
+  private StringBuilder displayWord;
+  private Pane hangmanPane;
+  private Player player;
+
+  private List<PlayerArea> playerAreaList;
+
   public PlayerArea(Player player) {
     super();
-    TextField textFieldGuess = createAndConfigureTextField();
-    Button buttonGuess = createGuessButton();
-    Button confirmButton = confirmButton();
-    Label playerlbl = generatePlayerLabel(player);
-    StringBuilder displayWord = generateDisplayWord();
-    Pane hangmanPane = new Pane();
-    Label wordToGuessLabel = new Label(displayWord.toString());
+    this.playerAreaList = new ArrayList<>();
 
-    this.getChildren().addAll(playerlbl, textFieldGuess, buttonGuess, confirmButton, wordToGuessLabel, hangmanPane);
+    this.player = player;
+    textFieldGuess = createAndConfigureTextField();
+    buttonGuess = createGuessButton();
+    confirmButton = confirmButton();
+    playerLbl = generatePlayerLabel(player);
+    displayWord = generateDisplayWord();
+    hangmanPane = new Pane();
+    wordToGuessLbl = new Label(displayWord.toString());
+
+    this.getChildren().addAll(playerLbl, textFieldGuess, buttonGuess, confirmButton, wordToGuessLbl, hangmanPane);
 
     hangmanPane.setPrefSize(200, 200);
   }
+
+  public void observePlayerAreas(PlayerArea...playerAreas) {
+    playerAreaList = List.of(playerAreas);
+  }
+
+  public void attachPlayerInteraction(Figure draw, TurnOrder turnOrder, EndTurnHandler endTurnHandler) {
+    buttonGuess.setOnAction(new PlayerInteraction(
+            this.player,
+            this.textFieldGuess,
+            this.displayWord,
+            draw,
+            this.hangmanPane,
+            this.wordToGuessLbl,
+            this.playerLbl,
+            turnOrder,
+            this,
+            playerAreaList.get(0),
+            playerAreaList.get(1),
+            playerAreaList.get(2),
+            endTurnHandler
+    ));
+  }
+
 
   public StringBuilder generateDisplayWord() {
     return new StringBuilder("____");

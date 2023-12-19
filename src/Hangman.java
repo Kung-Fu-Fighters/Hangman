@@ -56,10 +56,10 @@ public class Hangman extends Application {
         grid.add(hangmanPane, 0, 0);
 
 
-        VBox playerArea1 = new PlayerArea(playerList.get(0));
-        VBox playerArea2 = new PlayerArea(playerList.get(1));
-        VBox playerArea3 = new PlayerArea(playerList.get(2));
-        VBox playerArea4 = new PlayerArea(playerList.get(3));
+        PlayerArea playerArea1 = new PlayerArea(playerList.get(0));
+        PlayerArea playerArea2 = new PlayerArea(playerList.get(1));
+        PlayerArea playerArea3 = new PlayerArea(playerList.get(2));
+        PlayerArea playerArea4 = new PlayerArea(playerList.get(3));
         playerArea1.setStyle("-fx-background-color: #e7cbcb;");
         // Create a label to display the word to be guessed
 
@@ -87,79 +87,12 @@ public class Hangman extends Application {
         VictoryConditions vicCond = new VictoryConditions(playerList);
         //vicCond.checkVictoryCondition(playerList);
 
+        playerArea1.observePlayerAreas(playerArea2, playerArea3, playerArea4);
+        playerArea2.observePlayerAreas(playerArea1, playerArea3, playerArea4);
+        playerArea3.observePlayerAreas(playerArea1, playerArea2, playerArea4);
+        playerArea4.observePlayerAreas(playerArea1, playerArea2, playerArea3);
 
-        /*buttonGuess1.setOnAction(new PlayerInteraction(
-
-                playerList.get(0),
-                textFieldGuess1,
-                displayWord1,
-                draw,
-                hangmanPane1,
-                wordToGuessLabel1,
-                player1lbl,
-                turnOrder,
-                playerArea1,
-                playerArea2,
-                playerArea3,
-                playerArea4,
-                vicCond::checkVictoryCondition
-        ));
-
-        buttonGuess2.setOnAction(new PlayerInteraction(
-                playerList.get(1),
-                textFieldGuess2,
-                displayWord2,
-                draw,
-                hangmanPane2,
-                wordToGuessLabel2,
-                player2lbl,
-                turnOrder,
-                playerArea2,
-                playerArea1,
-                playerArea3,
-                playerArea4,
-                () -> vicCond.changeScoreTable()
-
-        ));
-
-        buttonGuess3.setOnAction(new PlayerInteraction(
-                playerList.get(2),
-                textFieldGuess3,
-                displayWord3,
-                draw,
-                hangmanPane3,
-                wordToGuessLabel3,
-                player3lbl,
-                turnOrder,
-                playerArea3,
-                playerArea1,
-                playerArea2,
-                playerArea4,
-                vicCond::checkVictoryCondition
-        ));
-
-        buttonGuess4.setOnAction(new PlayerInteraction(
-                playerList.get(3),
-                textFieldGuess4,
-                displayWord4,
-                draw,
-                hangmanPane4,
-                wordToGuessLabel4,
-                player4lbl,
-                turnOrder,
-                playerArea4,
-                playerArea1,
-                playerArea2,
-                playerArea3,
-                vicCond::checkVictoryCondition
-
-
-        ));*/
-
-        //confirmButton();
+        playerArea1.attachPlayerInteraction(draw, turnOrder, vicCond::checkVictoryCondition);
     }
 
-    public void createPlayerInteraction() {
-
-    }
 }
