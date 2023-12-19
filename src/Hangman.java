@@ -6,20 +6,48 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 public class Hangman extends Application {
+
+    public static StringBuilder generateDisplayWord() {
+        return new StringBuilder("____");
+    }
+    public static Button createGuessButton() {
+        return new Button("Gissa");
+    }
+    public static Label generatePlayerLabel(Player player) {
+        String playerName = player.getName();
+        int score = player.getScore();
+        String playerInfo = playerName + " " + score;
+        return new Label(playerInfo);
+    }
+    public static void setupButtonGuessAction(List<Player> playerList, List<Button> buttons,
+                                              List<TextField> textFields, List<StringBuilder> displayWords,
+                                              List<Pane> hangmanPanes, List<Label> wordToGuessLabels,
+                                              List<Label> playerLabels, Figure draw) {
+        for (int i = 0; i < playerList.size(); i++) {
+            int playerIndex = i;
+            buttons.get(i).setOnAction(new PlayerInteraction(
+                    playerList.get(playerIndex),
+                    textFields.get(playerIndex),
+                    displayWords.get(playerIndex),
+                    draw,
+                    hangmanPanes.get(playerIndex),
+                    wordToGuessLabels.get(playerIndex),
+                    playerLabels.get(playerIndex)
+            ));
+        }
+    }
     public static void main(String[] args) {
         launch(args);
     }
-    private StringBuilder displayWord1 = new StringBuilder("____");
-    private StringBuilder displayWord2 = new StringBuilder("____");
-    private StringBuilder displayWord3 = new StringBuilder("____");
-    private StringBuilder displayWord4 = new StringBuilder("____");
 
     public void start(Stage primaryStage) {
 
-
         Figure draw = new Figure();
         PlayerList playerList = new PlayerList();
+
         playerList.addPlayer("Yves - Poäng: ", "java");
         playerList.addPlayer("Rudolf - Poäng: ", "game");
         playerList.addPlayer("Nicolaus - Poäng: ", "gran");
@@ -29,6 +57,7 @@ public class Hangman extends Application {
 
         primaryStage.setTitle("Awesome Hangman v0.1");
         Button buttonStartGame = new Button("Start a new game"); //Is not in use at the moment
+
         GridPane grid = new GridPane();
         Pane hangmanPane = new Pane();
         grid.add(hangmanPane, 0, 0);
@@ -43,27 +72,20 @@ public class Hangman extends Application {
         textFieldGuess3.setPrefWidth(100);
         textFieldGuess4.setPrefWidth(100);
 
-        Button buttonGuess1 = new Button("Gissa");
-        Button buttonGuess2 = new Button("Gissa");
-        Button buttonGuess3 = new Button("Gissa");
-        Button buttonGuess4 = new Button("Gissa");
+        Button buttonGuess1 = createGuessButton();
+        Button buttonGuess2 = createGuessButton();
+        Button buttonGuess3 = createGuessButton();
+        Button buttonGuess4 = createGuessButton();
 
-        Button confirmButton1 = new Button("Bekräfta ord");
-        Button confirmButton2 = new Button("Bekräfta ord");
-        Button confirmButton3 = new Button("Bekräfta ord");
-        Button confirmButton4 = new Button("Bekräfta ord");
+        Label player1lbl = generatePlayerLabel(playerList.get(0));
+        Label player2lbl = generatePlayerLabel(playerList.get(1));
+        Label player3lbl = generatePlayerLabel(playerList.get(2));
+        Label player4lbl = generatePlayerLabel(playerList.get(3));
 
-        //BorderPane borderPane = new BorderPane();
-
-        int scoreTable1 = playerList.get(0).getScore();
-        int scoreTable2 = playerList.get(1).getScore();
-        int scoreTable3 = playerList.get(2).getScore();
-        int scoreTable4 = playerList.get(3).getScore();
-
-        String player1 = playerList.get(0).getName() + scoreTable1;
-        String player2 = playerList.get(1).getName() + scoreTable2;
-        String player3 = playerList.get(2).getName() + scoreTable3;
-        String player4 = playerList.get(3).getName() + scoreTable4;
+        StringBuilder displayWord1 = generateDisplayWord();
+        StringBuilder displayWord2 = generateDisplayWord();
+        StringBuilder displayWord3 = generateDisplayWord();
+        StringBuilder displayWord4 = generateDisplayWord();
 
         Pane hangmanPane1 = new Pane();
         Pane hangmanPane2 = new Pane();
@@ -81,17 +103,10 @@ public class Hangman extends Application {
         Label wordToGuessLabel3 = new Label(displayWord3.toString());
         Label wordToGuessLabel4 = new Label(displayWord4.toString());
 
-
-        Label player1lbl = new Label(player1);
-        Label player2lbl = new Label(player2);
-        Label player3lbl = new Label(player3);
-        Label player4lbl = new Label(player4);
-
-
-        playerArea1.getChildren().addAll(player1lbl, textFieldGuess1, buttonGuess1, confirmButton1, wordToGuessLabel1, hangmanPane1);
-        playerArea2.getChildren().addAll(player2lbl, textFieldGuess2, buttonGuess2, confirmButton2, wordToGuessLabel2, hangmanPane2);
-        playerArea3.getChildren().addAll(player3lbl, textFieldGuess3, buttonGuess3, confirmButton3, wordToGuessLabel3, hangmanPane3);
-        playerArea4.getChildren().addAll(player4lbl, textFieldGuess4, buttonGuess4, confirmButton4, wordToGuessLabel4, hangmanPane4);
+        playerArea1.getChildren().addAll(player1lbl, textFieldGuess1, buttonGuess1, wordToGuessLabel1, hangmanPane1);
+        playerArea2.getChildren().addAll(player2lbl, textFieldGuess2, buttonGuess2, wordToGuessLabel2, hangmanPane2);
+        playerArea3.getChildren().addAll(player3lbl, textFieldGuess3, buttonGuess3, wordToGuessLabel3, hangmanPane3);
+        playerArea4.getChildren().addAll(player4lbl, textFieldGuess4, buttonGuess4, wordToGuessLabel4, hangmanPane4);
 
         HBox topBox = new HBox();
         topBox.getChildren().addAll(playerArea1, playerArea2);
@@ -120,14 +135,15 @@ public class Hangman extends Application {
         VictoryConditions vicCond = new VictoryConditions();
         vicCond.checkVictoryCondition(playerList);
 
+
         buttonGuess1.setOnAction(new PlayerInteraction(
-                playerList.get(0),
-                textFieldGuess1,
-                displayWord1,
-                draw,
-                hangmanPane1,
-                wordToGuessLabel1,
-                player1lbl
+            playerList.get(0),
+            textFieldGuess1,
+            displayWord1,
+            draw,
+            hangmanPane1,
+            wordToGuessLabel1,
+            player1lbl
         ));
 
         buttonGuess2.setOnAction(new PlayerInteraction(
@@ -159,17 +175,5 @@ public class Hangman extends Application {
                 wordToGuessLabel4,
                 player4lbl
         ));
-
-        confirmButton1.setOnAction(new PlayerInteraction(
-                playerList.get(3),
-                textFieldGuess4,
-                displayWord4,
-                draw,
-                hangmanPane4,
-                wordToGuessLabel4,
-                player4lbl
-        ));
-
-
     }
 }
