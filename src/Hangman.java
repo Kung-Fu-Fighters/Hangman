@@ -20,6 +20,12 @@ public class Hangman extends Application {
     public static Button confirmButton() {
         return new Button("Bekräfta ord");
     }
+
+    public static TextField createAndConfigureTextField() {
+        TextField textField = new TextField();
+        textField.setPrefWidth(100);
+        return textField;
+    }
     public static Label generatePlayerLabel(Player player) {
         String playerName = player.getName();
         int score = player.getScore();
@@ -66,15 +72,10 @@ public class Hangman extends Application {
         Pane hangmanPane = new Pane();
         grid.add(hangmanPane, 0, 0);
 
-        TextField textFieldGuess1 = new TextField();
-        TextField textFieldGuess2 = new TextField();
-        TextField textFieldGuess3 = new TextField();
-        TextField textFieldGuess4 = new TextField();
-
-        textFieldGuess1.setPrefWidth(100);
-        textFieldGuess2.setPrefWidth(100);
-        textFieldGuess3.setPrefWidth(100);
-        textFieldGuess4.setPrefWidth(100);
+        TextField textFieldGuess1 = createAndConfigureTextField();
+        TextField textFieldGuess2 = createAndConfigureTextField();
+        TextField textFieldGuess3 = createAndConfigureTextField();
+        TextField textFieldGuess4 = createAndConfigureTextField();
 
         Button buttonGuess1 = createGuessButton();
         Button buttonGuess2 = createGuessButton();
