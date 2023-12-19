@@ -112,4 +112,5 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
   public boolean isTextInWord(String text) {
     return player.getGuessedWord().contains(text);
   }
+
 }
