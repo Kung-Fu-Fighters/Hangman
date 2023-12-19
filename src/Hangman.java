@@ -6,8 +6,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import java.util.List;
-
 public class Hangman extends Application {
 
     public static StringBuilder generateDisplayWord() {
@@ -49,6 +47,8 @@ public class Hangman extends Application {
             ));
         }
     }*/
+
+    // text input dialog
     public static void main(String[] args) {
         launch(args);
     }
@@ -214,5 +214,7 @@ public class Hangman extends Application {
 
 
         ));
+
+        confirmButton();
     }
 }
