@@ -20,11 +20,11 @@ public class PlayerArea extends VBox {
   private Pane hangmanPane;
   private Player player;
 
-  private List<PlayerArea> playerAreaList;
+  private List<PlayerArea> otherPlayerAreas;
+  private List<PlayerArea> allPlayerAreas;
 
   public PlayerArea(Player player) {
     super();
-    this.playerAreaList = new ArrayList<>();
 
     this.player = player;
     textFieldGuess = createAndConfigureTextField();
@@ -40,8 +40,15 @@ public class PlayerArea extends VBox {
     hangmanPane.setPrefSize(200, 200);
   }
 
-  public void observePlayerAreas(PlayerArea...playerAreas) {
-    playerAreaList = List.of(playerAreas);
+  public void observePlayerAreas(List<PlayerArea> playerAreas) {
+    this.allPlayerAreas = playerAreas;
+    this.otherPlayerAreas = new ArrayList<>();
+
+    for (PlayerArea playerArea : playerAreas) {
+      if(!playerArea.equals(this)) {
+        otherPlayerAreas.add(playerArea);
+      }
+    }
   }
 
   public void attachPlayerInteraction(Figure draw, TurnOrder turnOrder, EndTurnHandler endTurnHandler) {
@@ -54,10 +61,7 @@ public class PlayerArea extends VBox {
             this.wordToGuessLbl,
             this.playerLbl,
             turnOrder,
-            this,
-            playerAreaList.get(0),
-            playerAreaList.get(1),
-            playerAreaList.get(2),
+            allPlayerAreas,
             endTurnHandler
     ));
   }

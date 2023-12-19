@@ -6,6 +6,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Hangman extends Application {
 
 
@@ -56,23 +59,33 @@ public class Hangman extends Application {
         grid.add(hangmanPane, 0, 0);
 
 
-        PlayerArea playerArea1 = new PlayerArea(playerList.get(0));
-        PlayerArea playerArea2 = new PlayerArea(playerList.get(1));
-        PlayerArea playerArea3 = new PlayerArea(playerList.get(2));
-        PlayerArea playerArea4 = new PlayerArea(playerList.get(3));
-        playerArea1.setStyle("-fx-background-color: #e7cbcb;");
+        List<PlayerArea> playerAreaList = new ArrayList<>();
+        for(Player player : playerList.getPlayers()) {
+            playerAreaList.add(new PlayerArea(player));
+        }
+        /*List<PlayerArea> playerAreaList = playerList
+                        .getPlayers()
+                        .stream()
+                        //.map(player -> new PlayerArea((player)))
+                        .map(PlayerArea::new)
+                        .toList();*/
+
+        playerAreaList.get(0).setStyle("-fx-background-color: #e7cbcb;");
         // Create a label to display the word to be guessed
 
 
         HBox topBox = new HBox();
-        topBox.getChildren().addAll(playerArea1, playerArea2);
         HBox bottomBox = new HBox();
-        bottomBox.getChildren().addAll(playerArea3, playerArea4);
 
-        HBox.setHgrow(playerArea1, Priority.ALWAYS);
-        HBox.setHgrow(playerArea2, Priority.ALWAYS);
-        HBox.setHgrow(playerArea3, Priority.ALWAYS);
-        HBox.setHgrow(playerArea4, Priority.ALWAYS);
+        for (int i = 0; i < playerAreaList.size(); i++) {
+            if(i < playerAreaList.size() / 2) {
+                topBox.getChildren().addAll(playerAreaList.get(i));
+            } else {
+                bottomBox.getChildren().addAll(playerAreaList.get(i));
+            }
+            HBox.setHgrow(playerAreaList.get(i), Priority.ALWAYS);
+        }
+
         VBox.setVgrow(topBox, Priority.ALWAYS);
         VBox.setVgrow(bottomBox, Priority.ALWAYS);
 
@@ -85,14 +98,10 @@ public class Hangman extends Application {
         primaryStage.show();
 
         VictoryConditions vicCond = new VictoryConditions(playerList);
-        //vicCond.checkVictoryCondition(playerList);
 
-        playerArea1.observePlayerAreas(playerArea2, playerArea3, playerArea4);
-        playerArea2.observePlayerAreas(playerArea1, playerArea3, playerArea4);
-        playerArea3.observePlayerAreas(playerArea1, playerArea2, playerArea4);
-        playerArea4.observePlayerAreas(playerArea1, playerArea2, playerArea3);
-
-        playerArea1.attachPlayerInteraction(draw, turnOrder, vicCond::checkVictoryCondition);
+        for (PlayerArea playerArea : playerAreaList) {
+            playerArea.observePlayerAreas(playerAreaList);
+            playerArea.attachPlayerInteraction(draw, turnOrder, vicCond::checkVictoryCondition);
+        }
     }
-
 }
