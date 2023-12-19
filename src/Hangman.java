@@ -32,7 +32,7 @@ public class Hangman extends Application {
         String playerInfo = playerName + " " + score;
         return new Label(playerInfo);
     }
-    public static void setupButtonGuessAction(List<Player> playerList, List<Button> buttons,
+    /*public static void setupButtonGuessAction(List<Player> playerList, List<Button> buttons,
                                               List<TextField> textFields, List<StringBuilder> displayWords,
                                               List<Pane> hangmanPanes, List<Label> wordToGuessLabels,
                                               List<Label> playerLabels, Figure draw) {
@@ -48,7 +48,7 @@ public class Hangman extends Application {
                     playerLabels.get(playerIndex)
             ));
         }
-    }
+    }*/
     public static void main(String[] args) {
         launch(args);
     }
@@ -57,6 +57,9 @@ public class Hangman extends Application {
 
         Figure draw = new Figure();
         PlayerList playerList = new PlayerList();
+
+        TurnOrder turnOrder = new TurnOrder(playerList.getPlayers());
+
 
         playerList.addPlayer("Yves - Poäng: ", "java");
         playerList.addPlayer("Rudolf - Poäng: ", "game");
@@ -106,7 +109,7 @@ public class Hangman extends Application {
         VBox playerArea2 = new VBox();
         VBox playerArea3 = new VBox();
         VBox playerArea4 = new VBox();
-
+        playerArea1.setStyle("-fx-background-color: #e7cbcb;");
         // Create a label to display the word to be guessed
         Label wordToGuessLabel1 = new Label(displayWord1.toString());
         Label wordToGuessLabel2 = new Label(displayWord2.toString());
@@ -147,13 +150,21 @@ public class Hangman extends Application {
 
 
         buttonGuess1.setOnAction(new PlayerInteraction(
-            playerList.get(0),
-            textFieldGuess1,
-            displayWord1,
-            draw,
-            hangmanPane1,
-            wordToGuessLabel1,
-            player1lbl
+
+                playerList.get(0),
+                textFieldGuess1,
+                displayWord1,
+                draw,
+                hangmanPane1,
+                wordToGuessLabel1,
+                player1lbl,
+                turnOrder,
+                playerArea1,
+                playerArea2,
+                playerArea3,
+                playerArea4
+
+
         ));
 
         buttonGuess2.setOnAction(new PlayerInteraction(
@@ -163,7 +174,13 @@ public class Hangman extends Application {
                 draw,
                 hangmanPane2,
                 wordToGuessLabel2,
-                player2lbl
+                player2lbl,
+                turnOrder,
+                playerArea2,
+                playerArea1,
+                playerArea3,
+                playerArea4
+
         ));
 
         buttonGuess3.setOnAction(new PlayerInteraction(
@@ -173,7 +190,12 @@ public class Hangman extends Application {
                 draw,
                 hangmanPane3,
                 wordToGuessLabel3,
-                player3lbl
+                player3lbl,
+                turnOrder,
+                playerArea3,
+                playerArea1,
+                playerArea2,
+                playerArea4
         ));
 
         buttonGuess4.setOnAction(new PlayerInteraction(
@@ -183,7 +205,14 @@ public class Hangman extends Application {
                 draw,
                 hangmanPane4,
                 wordToGuessLabel4,
-                player4lbl
+                player4lbl,
+                turnOrder,
+                playerArea4,
+                playerArea1,
+                playerArea2,
+                playerArea3
+
+
         ));
     }
 }

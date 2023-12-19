@@ -6,17 +6,14 @@ public class PlayerList{
     //A list to keep player items
     private List<Player> players;
     public PlayerList(){
+
         this.players = new ArrayList<>();
-    }
-    //To avoid direct modification it calls a copy of the player list
-    public List<Player> getPlayers(){
-        return players;
     }
 
     public void setPlayers(List<Player> players){
         this.players = players;
     }
-    // To adding one player at a time
+    // To add one player at a time
     public void addPlayer(String name, String guessedWord){
         players.add(new Player(name, guessedWord));
     }
@@ -31,7 +28,12 @@ public class PlayerList{
         }
     }
 
+    public List<Player> getPlayers() {
+        return this.players;
+    }
+
     public void initializeAll() {
         players.forEach(Player::initialize);
     }
+
 }
