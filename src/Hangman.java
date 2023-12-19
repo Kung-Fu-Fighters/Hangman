@@ -16,6 +16,16 @@ public class Hangman extends Application {
     public static Button createGuessButton() {
         return new Button("Gissa");
     }
+
+    public static Button confirmButton() {
+        return new Button("Bekräfta ord");
+    }
+
+    public static TextField createAndConfigureTextField() {
+        TextField textField = new TextField();
+        textField.setPrefWidth(100);
+        return textField;
+    }
     public static Label generatePlayerLabel(Player player) {
         String playerName = player.getName();
         int score = player.getScore();
@@ -62,20 +72,20 @@ public class Hangman extends Application {
         Pane hangmanPane = new Pane();
         grid.add(hangmanPane, 0, 0);
 
-        TextField textFieldGuess1 = new TextField();
-        TextField textFieldGuess2 = new TextField();
-        TextField textFieldGuess3 = new TextField();
-        TextField textFieldGuess4 = new TextField();
-
-        textFieldGuess1.setPrefWidth(100);
-        textFieldGuess2.setPrefWidth(100);
-        textFieldGuess3.setPrefWidth(100);
-        textFieldGuess4.setPrefWidth(100);
+        TextField textFieldGuess1 = createAndConfigureTextField();
+        TextField textFieldGuess2 = createAndConfigureTextField();
+        TextField textFieldGuess3 = createAndConfigureTextField();
+        TextField textFieldGuess4 = createAndConfigureTextField();
 
         Button buttonGuess1 = createGuessButton();
         Button buttonGuess2 = createGuessButton();
         Button buttonGuess3 = createGuessButton();
         Button buttonGuess4 = createGuessButton();
+
+        Button confirmButton1 = confirmButton();
+        Button confirmButton2 = confirmButton();
+        Button confirmButton3 = confirmButton();
+        Button confirmButton4 = confirmButton();
 
         Label player1lbl = generatePlayerLabel(playerList.get(0));
         Label player2lbl = generatePlayerLabel(playerList.get(1));
@@ -103,10 +113,10 @@ public class Hangman extends Application {
         Label wordToGuessLabel3 = new Label(displayWord3.toString());
         Label wordToGuessLabel4 = new Label(displayWord4.toString());
 
-        playerArea1.getChildren().addAll(player1lbl, textFieldGuess1, buttonGuess1, wordToGuessLabel1, hangmanPane1);
-        playerArea2.getChildren().addAll(player2lbl, textFieldGuess2, buttonGuess2, wordToGuessLabel2, hangmanPane2);
-        playerArea3.getChildren().addAll(player3lbl, textFieldGuess3, buttonGuess3, wordToGuessLabel3, hangmanPane3);
-        playerArea4.getChildren().addAll(player4lbl, textFieldGuess4, buttonGuess4, wordToGuessLabel4, hangmanPane4);
+        playerArea1.getChildren().addAll(player1lbl, textFieldGuess1, buttonGuess1, confirmButton1, wordToGuessLabel1, hangmanPane1);
+        playerArea2.getChildren().addAll(player2lbl, textFieldGuess2, buttonGuess2, confirmButton2, wordToGuessLabel2, hangmanPane2);
+        playerArea3.getChildren().addAll(player3lbl, textFieldGuess3, buttonGuess3, confirmButton3, wordToGuessLabel3, hangmanPane3);
+        playerArea4.getChildren().addAll(player4lbl, textFieldGuess4, buttonGuess4, confirmButton4, wordToGuessLabel4, hangmanPane4);
 
         HBox topBox = new HBox();
         topBox.getChildren().addAll(playerArea1, playerArea2);

@@ -13,6 +13,8 @@ public class Player {
 
     private int positionY;
 
+    private String wordToGuess;
+
     Label scoreLabel = new Label();
     // Bind label's text property to the score
 
@@ -71,4 +73,5 @@ public class Player {
     public final void setScore(int score) {
         this.score.set(score);
     }
+
 }
