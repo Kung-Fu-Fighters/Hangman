@@ -6,6 +6,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.util.List;
+
 public class PlayerInteraction implements EventHandler<ActionEvent> {
 
   private Player player;
@@ -16,10 +18,14 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
   private Label wordToGuessLabel;
   private Label playerLabel;
   private TurnOrder turnOrder;
-  private VBox playerAreaA;
+  private List<PlayerArea> playerAreas;
+
+  /*private VBox playerAreaA;
   private VBox playerAreaB;
   private VBox playerAreaC;
-  private VBox playerAreaD;
+  private VBox playerAreaD;*/
+
+  private EndTurnHandler endTurnHandler;
 
   public PlayerInteraction(Player player,
                            TextField textFieldGuess,
@@ -29,10 +35,8 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
                            Label wordToGuessLabel,
                            Label playerLabel,
                            TurnOrder turnOrder,
-                           VBox playerAreaA,
-                           VBox playerAreaB,
-                           VBox playerAreaC,
-                           VBox playerAreaD) {
+                            List<PlayerArea> playerAreas,
+                           EndTurnHandler endTurnHandler) {
     this.player = player;
     this.textFieldGuess = textFieldGuess;
     this.displayWord = displayWord;
@@ -41,10 +45,9 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
     this.wordToGuessLabel = wordToGuessLabel;
     this.playerLabel = playerLabel;
     this.turnOrder= turnOrder;
-    this.playerAreaA=playerAreaA;
-    this.playerAreaB=playerAreaB;
-    this.playerAreaC=playerAreaC;
-    this.playerAreaD=playerAreaD;
+
+    this.playerAreas = playerAreas;
+    this.endTurnHandler = endTurnHandler;
   }
 
   @Override
@@ -63,8 +66,10 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
     } else {
       handleIncorrectGuess();
     }
+
     changeTurn();
     render();
+    endTurnHandler.handle();
   }
 
 
@@ -73,10 +78,10 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
 
     turnOrder.setGuessingAmount(guessingAmountNumber+1);
     if(guessingAmountNumber==3){
-      playerAreaA.setStyle("-fx-background-color: #ffffff;");
-      playerAreaB.setStyle("-fx-background-color: #ffffff;");
-      playerAreaC.setStyle("-fx-background-color: #ffffff;");
-      playerAreaD.setStyle("-fx-background-color: #ffffff;");
+      for(VBox playerArea : playerAreas) {
+        playerArea.setStyle("-fx-background-color: #ffffff;");
+      }
+
       turnOrder.setGuessingAmount(guessingAmountNumber=1);
       turnOrder.moveToNextPlayer();
     }
@@ -86,7 +91,7 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
     wordToGuessLabel.setText(displayWord.toString().toUpperCase());
     playerLabel.setText(player.getName() + player.getScore());
     if (turnOrder.getGuessingAmount()==1){
-      playerAreaA.setStyle("-fx-background-color: #e7cbcb;");
+      playerAreas.get(0).setStyle("-fx-background-color: #e7cbcb;");
     }
 
   }
