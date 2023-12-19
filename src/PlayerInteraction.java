@@ -21,6 +21,8 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
   private VBox playerAreaC;
   private VBox playerAreaD;
 
+  private EndTurnHandler endTurnHandler;
+
   public PlayerInteraction(Player player,
                            TextField textFieldGuess,
                            StringBuilder displayWord,
@@ -32,7 +34,8 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
                            VBox playerAreaA,
                            VBox playerAreaB,
                            VBox playerAreaC,
-                           VBox playerAreaD) {
+                           VBox playerAreaD,
+                           EndTurnHandler endTurnHandler) {
     this.player = player;
     this.textFieldGuess = textFieldGuess;
     this.displayWord = displayWord;
@@ -45,6 +48,7 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
     this.playerAreaB=playerAreaB;
     this.playerAreaC=playerAreaC;
     this.playerAreaD=playerAreaD;
+    this.endTurnHandler = endTurnHandler;
   }
 
   @Override
@@ -63,8 +67,10 @@ public class PlayerInteraction implements EventHandler<ActionEvent> {
     } else {
       handleIncorrectGuess();
     }
+
     changeTurn();
     render();
+    endTurnHandler.handle();
   }
 
 

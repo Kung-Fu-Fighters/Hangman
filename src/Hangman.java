@@ -8,28 +8,8 @@ import javafx.stage.Stage;
 
 public class Hangman extends Application {
 
-    public static StringBuilder generateDisplayWord() {
-        return new StringBuilder("____");
-    }
-    public static Button createGuessButton() {
-        return new Button("Gissa");
-    }
 
-    public static Button confirmButton() {
-        return new Button("Bekräfta ord");
-    }
 
-    public static TextField createAndConfigureTextField() {
-        TextField textField = new TextField();
-        textField.setPrefWidth(100);
-        return textField;
-    }
-    public static Label generatePlayerLabel(Player player) {
-        String playerName = player.getName();
-        int score = player.getScore();
-        String playerInfo = playerName + " " + score;
-        return new Label(playerInfo);
-    }
     /*public static void setupButtonGuessAction(List<Player> playerList, List<Button> buttons,
                                               List<TextField> textFields, List<StringBuilder> displayWords,
                                               List<Pane> hangmanPanes, List<Label> wordToGuessLabels,
@@ -75,51 +55,14 @@ public class Hangman extends Application {
         Pane hangmanPane = new Pane();
         grid.add(hangmanPane, 0, 0);
 
-        TextField textFieldGuess1 = createAndConfigureTextField();
-        TextField textFieldGuess2 = createAndConfigureTextField();
-        TextField textFieldGuess3 = createAndConfigureTextField();
-        TextField textFieldGuess4 = createAndConfigureTextField();
 
-        Button buttonGuess1 = createGuessButton();
-        Button buttonGuess2 = createGuessButton();
-        Button buttonGuess3 = createGuessButton();
-        Button buttonGuess4 = createGuessButton();
-
-        Button confirmButton1 = confirmButton();
-        Button confirmButton2 = confirmButton();
-        Button confirmButton3 = confirmButton();
-        Button confirmButton4 = confirmButton();
-
-        Label player1lbl = generatePlayerLabel(playerList.get(0));
-        Label player2lbl = generatePlayerLabel(playerList.get(1));
-        Label player3lbl = generatePlayerLabel(playerList.get(2));
-        Label player4lbl = generatePlayerLabel(playerList.get(3));
-
-        StringBuilder displayWord1 = generateDisplayWord();
-        StringBuilder displayWord2 = generateDisplayWord();
-        StringBuilder displayWord3 = generateDisplayWord();
-        StringBuilder displayWord4 = generateDisplayWord();
-
-        Pane hangmanPane1 = new Pane();
-        Pane hangmanPane2 = new Pane();
-        Pane hangmanPane3 = new Pane();
-        Pane hangmanPane4 = new Pane();
-
-        VBox playerArea1 = new VBox();
-        VBox playerArea2 = new VBox();
-        VBox playerArea3 = new VBox();
-        VBox playerArea4 = new VBox();
+        VBox playerArea1 = new PlayerArea(playerList.get(0));
+        VBox playerArea2 = new PlayerArea(playerList.get(1));
+        VBox playerArea3 = new PlayerArea(playerList.get(2));
+        VBox playerArea4 = new PlayerArea(playerList.get(3));
         playerArea1.setStyle("-fx-background-color: #e7cbcb;");
         // Create a label to display the word to be guessed
-        Label wordToGuessLabel1 = new Label(displayWord1.toString());
-        Label wordToGuessLabel2 = new Label(displayWord2.toString());
-        Label wordToGuessLabel3 = new Label(displayWord3.toString());
-        Label wordToGuessLabel4 = new Label(displayWord4.toString());
 
-        playerArea1.getChildren().addAll(player1lbl, textFieldGuess1, buttonGuess1, confirmButton1, wordToGuessLabel1, hangmanPane1);
-        playerArea2.getChildren().addAll(player2lbl, textFieldGuess2, buttonGuess2, confirmButton2, wordToGuessLabel2, hangmanPane2);
-        playerArea3.getChildren().addAll(player3lbl, textFieldGuess3, buttonGuess3, confirmButton3, wordToGuessLabel3, hangmanPane3);
-        playerArea4.getChildren().addAll(player4lbl, textFieldGuess4, buttonGuess4, confirmButton4, wordToGuessLabel4, hangmanPane4);
 
         HBox topBox = new HBox();
         topBox.getChildren().addAll(playerArea1, playerArea2);
@@ -133,10 +76,6 @@ public class Hangman extends Application {
         VBox.setVgrow(topBox, Priority.ALWAYS);
         VBox.setVgrow(bottomBox, Priority.ALWAYS);
 
-        hangmanPane1.setPrefSize(200, 200);
-        hangmanPane2.setPrefSize(200, 200);
-        hangmanPane3.setPrefSize(200, 200);
-        hangmanPane4.setPrefSize(200, 200);
 
         VBox root = new VBox();
         root.getChildren().addAll(topBox, bottomBox);
@@ -145,11 +84,11 @@ public class Hangman extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        VictoryConditions vicCond = new VictoryConditions();
-        vicCond.checkVictoryCondition(playerList);
+        VictoryConditions vicCond = new VictoryConditions(playerList);
+        //vicCond.checkVictoryCondition(playerList);
 
 
-        buttonGuess1.setOnAction(new PlayerInteraction(
+        /*buttonGuess1.setOnAction(new PlayerInteraction(
 
                 playerList.get(0),
                 textFieldGuess1,
@@ -162,9 +101,8 @@ public class Hangman extends Application {
                 playerArea1,
                 playerArea2,
                 playerArea3,
-                playerArea4
-
-
+                playerArea4,
+                vicCond::checkVictoryCondition
         ));
 
         buttonGuess2.setOnAction(new PlayerInteraction(
@@ -179,7 +117,8 @@ public class Hangman extends Application {
                 playerArea2,
                 playerArea1,
                 playerArea3,
-                playerArea4
+                playerArea4,
+                () -> vicCond.changeScoreTable()
 
         ));
 
@@ -195,7 +134,8 @@ public class Hangman extends Application {
                 playerArea3,
                 playerArea1,
                 playerArea2,
-                playerArea4
+                playerArea4,
+                vicCond::checkVictoryCondition
         ));
 
         buttonGuess4.setOnAction(new PlayerInteraction(
@@ -210,11 +150,16 @@ public class Hangman extends Application {
                 playerArea4,
                 playerArea1,
                 playerArea2,
-                playerArea3
+                playerArea3,
+                vicCond::checkVictoryCondition
 
 
-        ));
+        ));*/
 
-        confirmButton();
+        //confirmButton();
+    }
+
+    public void createPlayerInteraction() {
+
     }
 }
