@@ -1,4 +1,3 @@
-import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.Circle;
@@ -71,6 +70,7 @@ public class Figure {
                 // Case 11: Show that the player has won(for example with a text)
                 Text winText = new Text(positionX, positionY - 100, "Grattis, du har vunnit!\n Välj ett nytt ord");
                 root.getChildren().add(winText);
+                root.getChildren().clear();
                 break;
         }
     }
